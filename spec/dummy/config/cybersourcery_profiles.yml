@@ -1,0 +1,22 @@
+acptfee:
+  name: Admissions Acceptance Fee
+  service: test
+  access_key: dfd7d26021e53ad1a48f1ec10c528ec7
+  secret_key: 198e5f32e86e44ecab9c0f9c544ed2dbd42377605bd64cee85ea9d7c239babfabb664153975d49b3b6377cacf8343d282f34ba20b342482cbf892be121a3820524007662e8d54222b2ef50b2f535a2fa1556f9a257f54600bba3020ca66bf15dc327ec025ced4f23903d19435547001bd3a103b7577a4a6a998e588dbc4880be
+  success_url:
+  transaction_type: sale
+  endpoint_type: standard
+  payment_method: card
+  locale: en-us
+  currency: USD
+pwksgem:
+  name: PromptWorks Gem
+  service: test
+  access_key: fa145f4dd72c390f8d83b41bbdd39ee6
+  secret_key: 603c3baff7cb4fe4876b5b5965cfee16a4282ac3818a4aea84c687a56955262a07ef9fbac0d149b8a964270c76e2ffd1668b1106ee9349ec8557e00be898a8022559a45d10d64c7d94fa32e97cd713160ea6e028c33c4cde9966f39b5614b23bc9271c94a0814d0dbadc72ccb3d002fe08e8ba962e1d4d3494302f56d2eb1123
+  success_url: /responses
+  transaction_type: sale,create_payment_token
+  endpoint_type: standard
+  payment_method: card
+  locale: en-us
+  currency: USD
