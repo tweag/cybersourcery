@@ -1,0 +1,13 @@
+replace_this_key_with_your_cybersource_profile_id:
+  name: A nice description
+  service: test
+  access_key: your_access_key
+  secret_key: your_secret_key
+  success_url: http://your_optional_url_for_redirect_after_a_successful_transaction.com
+  transaction_type: sale,create_payment_token
+  endpoint_type: standard
+  payment_method: card
+  locale: en-us
+  currency: USD
+
+# you can have multiple profiles here
