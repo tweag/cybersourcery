@@ -3,6 +3,8 @@ require 'cybersourcery/configuration'
 require 'cybersourcery/exceptions'
 require 'cybersourcery/merchant_data_serializer'
 require 'cybersourcery/profile'
+require 'cybersourcery/payment'
+require 'cybersourcery/railtie'
 
 module Cybersourcery
   class << self
