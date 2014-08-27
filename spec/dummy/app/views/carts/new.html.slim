@@ -1,0 +1,9 @@
+.row
+  .col-xs-6.col-xs-offset-2
+    h1 Generic shopping cart
+
+    = form_tag pay_path, method: :post, class: 'form-horizontal', id: 'cart_form' do |f|
+      - @signed_fields.each do |field, value|
+        = hidden_field_tag field, value
+      = submit_tag 'Buy something cool for $100', class: 'btn btn-primary', id: 'commit', data: { disable_with: 'Please wait..' }
+

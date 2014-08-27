@@ -1,0 +1,13 @@
+.row
+  .col-xs-6.col-xs-offset-2
+    h1 Transaction complete
+
+    p Here are the deserialized merchant data fields:
+
+    dl
+    - @merchant_data.each do |k,v|
+      dt
+        = k
+      dd
+        = v
+

@@ -1,0 +1,42 @@
+.row
+  .col-xs-6.col-xs-offset-2
+    h1 New payment
+
+    = simple_form_for @payment,
+        url: @payment.form_action_url,
+        as: :payment,
+        html: { class: 'form-horizontal', role: 'form' },
+        wrapper: :horizontal_form do |f|
+
+      = add_signed_fields(@payment, f).html_safe
+
+      fieldset
+        legend Credit Card Information
+
+        = simple_form_input f, :bill_to_forename, params[:bill_to_forename]
+        = simple_form_input f, :bill_to_surname, params[:bill_to_surname]
+        = simple_form_input f, :card_number
+        = add_expiry_date_fields(f).html_safe
+        = simple_form_input f, :card_cvn
+        = simple_form_select f, :card_type, card_types, nil, true
+
+      fieldset
+        legend Billing Address
+
+        = simple_form_input f, :bill_to_phone, params[:bill_to_phone]
+        = simple_form_input f, :bill_to_email, params[:bill_to_email]
+        = simple_form_select f, :bill_to_address_country, countries, (params[:bill_to_address_country].present? ? params[:bill_to_address_country] : 'US')
+        = simple_form_input f, :bill_to_address_line1, params[:bill_to_address_line1]
+        = simple_form_input f, :bill_to_address_line2, params[:bill_to_address_line2]
+        = simple_form_input f, :bill_to_address_city, params[:bill_to_address_city]
+        = simple_form_select f, :bill_to_address_state, us_states, params[:bill_to_address_state], true
+        = simple_form_input f, :bill_to_address_postal_code, params[:bill_to_address_postal_code]
+
+      .form-group
+        .col-sm-offset-3.col-sm-9
+          = f.button :submit, 'Submit', class: 'btn btn-primary', id: 'commit', data: { disable_with: 'Please wait..' }
+
+form#templates
+  = select_tag 'bill_to_address_state', options_for_select(us_states), { prompt: 'Please select...', class: 'select required form-control', id: 'payment_bill_to_address_state_select_template' }
+  = text_field_tag 'bill_to_address_state', nil, id: 'payment_bill_to_address_state_input_template', class: 'string required form-control'
+
