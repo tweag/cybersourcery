@@ -9,6 +9,7 @@ require 'cybersourcery/cybersource_signer'
 require 'cybersourcery/signature_checker'
 require 'cybersourcery/cart_signature_checker'
 require 'cybersourcery/cybersource_signature_checker'
+require 'cybersourcery/reason_code_checker'
 
 module Cybersourcery
   class << self
