@@ -51,7 +51,7 @@ class PaymentsController < ApplicationController
     signature_checker = Cybersourcery::CartSignatureChecker.new({ profile: profile, params: params, session: session})
     signature_checker.run!
     signer = Cybersourcery::CybersourceSigner.new(profile, UNSIGNED_FIELD_NAMES)
-    @payment = Cybersourcery::MyPayment.new(signer, profile, params)
+    @payment = MyPayment.new(signer, profile, params)
     true
   rescue Cybersourcery::CybersourceryError => e
     # if there was an exception in confirm(), there will already be a flash message
