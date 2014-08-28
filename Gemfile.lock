@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cybersourcery (0.0.1)
+    cybersourcery (0.0.2)
       rails (~> 4.0.9)
       ruby-hmac (~> 0.4.0)
 
