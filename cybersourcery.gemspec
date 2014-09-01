@@ -31,5 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'uglifier', '>= 1.3.0'
   s.add_development_dependency 'coffee-rails', '~> 4.0.0'
   s.add_development_dependency 'jquery-rails'
+  s.add_development_dependency 'rack-translating_proxy', '~> 0.1.0'
+  s.add_development_dependency 'sinatra'
 end
 
