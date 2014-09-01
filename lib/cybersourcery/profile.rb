@@ -36,8 +36,10 @@ module Cybersourcery
       end
     end
 
-    def transaction_url
-      if @service == 'live'
+    def transaction_url(env = Rails.env, sop_proxy_url = Cybersourcery.configuration.sop_proxy_url)
+      if env == 'test'
+        "#{sop_proxy_url}#{VALID_ENDPOINTS[@endpoint_type]}"
+      elsif @service == 'live'
         "https://secureacceptance.cybersource.com#{VALID_ENDPOINTS[@endpoint_type]}"
       elsif @service == 'test'
         "https://testsecureacceptance.cybersource.com#{VALID_ENDPOINTS[@endpoint_type]}"
