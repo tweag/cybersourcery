@@ -25,13 +25,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'slim-rails', '~> 2.1.5'
   s.add_development_dependency 'bootstrap-sass', '~> 3.2.0.1'
-  s.add_development_dependency 'autoprefixer-rails', '~> 2.2.0.20140727'
   s.add_development_dependency 'simple_form', '~> 3.1.0.rc2'
   s.add_development_dependency 'sass-rails', '~> 4.0.2'
-  s.add_development_dependency 'uglifier', '>= 1.3.0'
   s.add_development_dependency 'coffee-rails', '~> 4.0.0'
   s.add_development_dependency 'jquery-rails'
   s.add_development_dependency 'rack-translating_proxy', '~> 0.1.0'
   s.add_development_dependency 'sinatra'
+  s.add_development_dependency 'nokogiri'
+  s.add_development_dependency 'webmock'
+  s.add_development_dependency 'vcr'
 end
 
