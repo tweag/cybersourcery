@@ -1,7 +1,7 @@
 module Cybersourcery
   class Configuration
     attr_reader :profiles
-    attr_accessor :mock_silent_order_post_url
+    attr_accessor :sop_proxy_url
 
     def profiles=(profiles_path)
       @profiles = YAML.load_file profiles_path
