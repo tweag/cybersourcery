@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [ "$1" == "fast" ]; then
+  runner="rackup"
+else
+  runner="shotgun"
+fi
+
+set -x
+bundle exec $runner -I ./spec -p 5555 spec/silent_order_post_proxy.ru
