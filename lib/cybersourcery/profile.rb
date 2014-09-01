@@ -36,10 +36,8 @@ module Cybersourcery
       end
     end
 
-    def transaction_url(env = Rails.env, mock_sop_url = Cybersourcery.configuration.mock_silent_order_post_url)
-      if env == 'test'
-        "#{mock_sop_url}#{VALID_ENDPOINTS[@endpoint_type]}"
-      elsif @service == 'live'
+    def transaction_url
+      if @service == 'live'
         "https://secureacceptance.cybersource.com#{VALID_ENDPOINTS[@endpoint_type]}"
       elsif @service == 'test'
         "https://testsecureacceptance.cybersource.com#{VALID_ENDPOINTS[@endpoint_type]}"

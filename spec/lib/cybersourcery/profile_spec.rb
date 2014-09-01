@@ -51,22 +51,17 @@ describe Cybersourcery::Profile do
   end
 
   describe '#transaction_url' do
-    it 'returns the Sorcery transaction URL, in the test environment' do
-      profile = Cybersourcery::Profile.new('pwksgem', profiles)
-      expect(profile.transaction_url).to eq 'http://localhost:4567/silent/pay'
-    end
-
     it 'returns the "test" service URL, when not in the test environment' do
       profiles['pwksgem']['service'] = 'test'
       profile = Cybersourcery::Profile.new('pwksgem', profiles)
-      transaction_url = profile.transaction_url('development')
+      transaction_url = profile.transaction_url
       expect(transaction_url).to eq 'https://testsecureacceptance.cybersource.com/silent/pay'
     end
 
     it 'returns the "live" service URL, when not in the test environment' do
       profiles['pwksgem']['service'] = 'live'
       profile = Cybersourcery::Profile.new('pwksgem', profiles)
-      transaction_url = profile.transaction_url('development')
+      transaction_url = profile.transaction_url
       expect(transaction_url).to eq 'https://secureacceptance.cybersource.com/silent/pay'
     end
   end
