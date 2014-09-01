@@ -34,18 +34,14 @@ feature 'Payments' do
       fill_in 'card_number', with: '4111111111111111'
       click_button 'Submit'
 
-      # We get a security warning running this through selenium (since we're submitting to https)
-      alert = page.driver.browser.switch_to.alert
-      alert.accept
-
       expect(page).to have_content 'Successful transaction'
     end
-  #
-  #   scenario 'Fails to complete a transaction with an invalid credit card', js: true do
-  #     fill_in 'card_number', with: '4111111111111112'
-  #     click_button 'Submit'
-  #
-  #     expect(page).to have_content 'Declined: One or more fields in the request contains invalid data'
-  #   end
+
+    scenario 'Fails to complete a transaction with an invalid credit card', js: true do
+      fill_in 'card_number', with: '4111111111111112'
+      click_button 'Submit'
+
+      expect(page).to have_content 'Declined: One or more fields in the request contains invalid data'
+    end
   end
 end
