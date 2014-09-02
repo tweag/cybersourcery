@@ -9,4 +9,4 @@ else
 fi
 
 set -x
-bundle exec $runner -I ./spec -p 5555 spec/silent_order_post_proxy.ru
+bundle exec $runner -I ./spec -p 5555 spec/cybersourcery_translating_proxy.ru

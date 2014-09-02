@@ -1,6 +1,6 @@
 require 'rack/translating_proxy'
 
-class SilentOrderPostProxy < Rack::TranslatingProxy
+class CybersourceryTranslatingProxy < Rack::TranslatingProxy
 
   def target_host
     'http://localhost:5556'

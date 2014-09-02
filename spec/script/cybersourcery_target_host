@@ -9,4 +9,4 @@ else
 fi
 
 set -x
-bundle exec $runner spec/target_host.rb -p 5556
+bundle exec $runner spec/cybersourcery_target_host.rb -p 5556
