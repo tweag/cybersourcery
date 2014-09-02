@@ -5,7 +5,7 @@ module Cybersourcery
     def initialize(session, signer, cart_fields)
       @session = session
       @signer = signer
-      @cart_fields = cart_fields
+      @cart_fields = cart_fields.dup
     end
 
     def run
@@ -18,7 +18,7 @@ module Cybersourcery
 
     def sign_cart_fields
       @cart_fields[:signed_field_names] = @cart_fields.keys.join(',')
-      @signer.form_fields = cart_fields
+      @signer.form_fields = @cart_fields
       @signed_cart_fields = @signer.signed_fields.dup
     end
 
