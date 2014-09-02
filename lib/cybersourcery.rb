@@ -24,6 +24,7 @@ if defined? Rails
     require 'nokogiri'
     require 'webmock'
     require 'vcr'
+    require 'shotgun'
   end
 end
 
