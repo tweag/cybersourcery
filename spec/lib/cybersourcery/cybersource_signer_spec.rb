@@ -14,7 +14,8 @@ describe Cybersourcery::CybersourceSigner do
           'endpoint_type' => 'standard',
           'payment_method' => 'card',
           'locale' => 'en-us',
-          'currency' => 'USD'
+          'currency' => 'USD',
+          'unsigned_field_names' => 'bill_to_email,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_line2,bill_to_address_country,bill_to_address_state,bill_to_address_postal_code,bill_to_address_city,card_cvn,card_expiry_date,card_number,card_type'
         }
     }
     Cybersourcery::Profile.new('pwksgem', cybersource_profiles)
@@ -23,22 +24,7 @@ describe Cybersourcery::CybersourceSigner do
   let(:time) { Time.parse '2014-03-05 13:30:59:UTC' }
   let(:signature) { 'SUPER_SECURE_SIGNATURE' }
   let(:signer) { double :signer, signature: signature }
-  let(:unsigned_field_names) { %w[
-    bill_to_email
-    bill_to_forename
-    bill_to_surname
-    bill_to_address_line1
-    bill_to_address_line2
-    bill_to_address_country
-    bill_to_address_state
-    bill_to_address_postal_code
-    bill_to_address_city
-    card_cvn
-    card_expiry_date
-    card_number
-    card_type
-  ] }
-  subject(:cybersource_signer) { Cybersourcery::CybersourceSigner.new(profile, unsigned_field_names, signer) }
+  subject(:cybersource_signer) { Cybersourcery::CybersourceSigner.new(profile, signer) }
 
   describe '#add_signable_fields' do
     it 'adds signable fields' do

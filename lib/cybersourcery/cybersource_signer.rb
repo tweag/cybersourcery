@@ -6,7 +6,7 @@ module Cybersourcery
     attr_accessor :profile, :signer
     attr_writer   :time
     attr_writer   :form_fields
-    attr_reader   :unsigned_field_names, :signable_fields
+    attr_reader   :signable_fields
 
     IGNORE_FIELDS = %i[
       commit
@@ -16,10 +16,9 @@ module Cybersourcery
       controller
     ]
 
-    def initialize(profile, unsigned_field_names = [], signer = Signer)
+    def initialize(profile, signer = Signer)
       @profile              = profile
       @signer               = signer
-      @unsigned_field_names = unsigned_field_names
       @signable_fields      = {
         access_key:           @profile.access_key,
         profile_id:           @profile.profile_id,
@@ -37,7 +36,7 @@ module Cybersourcery
 
     def add_signable_fields(params)
       @signable_fields.merge! params.symbolize_keys.delete_if { |k,v|
-        @unsigned_field_names.include?(k) || IGNORE_FIELDS.include?(k)
+        @profile.unsigned_field_names.include?(k) || IGNORE_FIELDS.include?(k)
       }
     end
 
@@ -51,7 +50,7 @@ module Cybersourcery
 
     def form_fields
       @form_fields ||= signable_fields.dup.merge(
-        unsigned_field_names: @unsigned_field_names.map { |e| e.to_s }.join(','),
+        unsigned_field_names: @profile.unsigned_field_names.map { |e| e.to_s }.join(','),
         transaction_uuid:     SecureRandom.hex(16),
         reference_number:     SecureRandom.hex(16)
       ).tap do |data|

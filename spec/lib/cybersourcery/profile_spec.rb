@@ -13,7 +13,8 @@ describe Cybersourcery::Profile do
         'endpoint_type' => 'standard',
         'payment_method' => 'card',
         'locale' => 'en-us',
-        'currency' => 'USD'
+        'currency' => 'USD',
+        'unsigned_field_names' => 'bill_to_email, bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_line2,bill_to_address_country,bill_to_address_state,bill_to_address_postal_code,bill_to_address_city,card_cvn,card_expiry_date,card_number,card_type'
       }
     }
   end
@@ -32,6 +33,7 @@ describe Cybersourcery::Profile do
       expect(profile.payment_method).to eq 'card'
       expect(profile.locale).to eq 'en-us'
       expect(profile.currency).to eq 'USD'
+      expect(profile.unsigned_field_names).to eq %w(bill_to_email bill_to_forename bill_to_surname bill_to_address_line1 bill_to_address_line2 bill_to_address_country bill_to_address_state bill_to_address_postal_code bill_to_address_city card_cvn card_expiry_date card_number card_type)
     end
 
     it 'raises an exception if the "service" value is not "live" or "test"' do
