@@ -10,13 +10,13 @@ module Cybersourcery
 
     attr_reader :signer, :profile, :params, :errors
     attr_accessor :bill_to_forename, :bill_to_surname, :card_number, :card_expiry_date,
-                  :card_expiry_dummy, :card_expiry_month, :card_expiry_year, :card_type,
+                  :card_expiry_month, :card_expiry_year, :card_type,
                   :bill_to_email, :bill_to_address_line1, :bill_to_address_line2,
                   :bill_to_address_city, :bill_to_address_state, :bill_to_address_postal_code
     validates_presence_of :bill_to_forename, :bill_to_surname, :card_number, :card_expiry_date,
-                          :card_expiry_dummy, :card_expiry_month, :card_expiry_year,
-                          :card_type, :bill_to_email, :bill_to_address_line1, :bill_to_address_city,
-                          :bill_to_address_state, :bill_to_address_postal_code
+                          :card_expiry_month, :card_expiry_year, :card_type, :bill_to_email,
+                          :bill_to_address_line1, :bill_to_address_city, :bill_to_address_state,
+                          :bill_to_address_postal_code
 
     # To keep ActiveModel::Conversion happy
     def persisted?
