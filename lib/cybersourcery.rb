@@ -13,6 +13,7 @@ if defined? Rails
   require 'cybersourcery/cart_signature_checker'
   require 'cybersourcery/cybersource_signature_checker'
   require 'cybersourcery/reason_code_checker'
+  require 'cybersourcery/container'
 
   if Rails.env.test?
     require 'slim-rails'
