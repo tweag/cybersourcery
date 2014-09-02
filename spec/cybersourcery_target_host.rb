@@ -28,8 +28,6 @@ end
 
 helpers do
   def cybersource_proxy_uri
-    puts 'WE ARE HERE****'
-    puts settings.to_yaml
     "http://#{settings.bind}:#{settings.port}"
   end
 
