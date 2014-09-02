@@ -1,5 +1,0 @@
-= Cybersourcery
-
-A pain removal gem for working with Cybersource Secure Acceptance Silent Order POST
-
-rails generate cybersourcery:config
