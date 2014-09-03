@@ -69,16 +69,16 @@ module Cybersourcery
       date_fields =  hidden_input form, :card_expiry_date
       date_fields << form.input(:card_expiry_dummy, label: field_label(:card_expiry_dummy)) do
         form.date_select(:card_expiry_dummy,
-                         {
-                           discard_day: true,
-                           order: [:month, :year],
-                           start_year: Date.today.year,
-                           end_year:  (Date.today.year + 19),
-                           use_two_digit_numbers: true,
-                           date_separator: ' / ',
-                           prompt: true
-                         },
-                         { class: classes }
+          {
+            discard_day: true,
+            order: [:month, :year],
+            start_year: Date.today.year,
+            end_year:  (Date.today.year + 19),
+            use_two_digit_numbers: true,
+            date_separator: ' / ',
+            prompt: true
+          },
+          { class: classes }
         )
       end
     end
