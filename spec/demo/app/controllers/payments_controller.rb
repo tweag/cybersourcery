@@ -26,9 +26,7 @@ class PaymentsController < ApplicationController
   private
 
   def normalize_cybersource_params
-    params.keys.each do |key|
-      params[key[4..-1]] = params[key] if key =~ /^req_/
-    end
+    Cybersourcery::CybersourceParamsNormalizer.run(params)
   end
 
   def setup_payment_form
