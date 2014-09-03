@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.rdoc']
 
-  s.add_dependency 'rails', '~> 4.0.9'
+  s.add_dependency 'rails', '>= 3.1'
   s.add_dependency 'ruby-hmac', '~> 0.4.0'
   s.add_development_dependency 'bundler', '~> 1.6'
   s.add_development_dependency 'rake'
