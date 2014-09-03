@@ -1,4 +1,4 @@
-require 'target_host_setup'
+require 'cybersourcery_target_host_setup'
 
 VCR.configure do |c|
   c.register_request_matcher :card_number_equality do |request_1, request_2|
