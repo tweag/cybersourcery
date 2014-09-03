@@ -14,6 +14,7 @@ if defined? Rails
   require 'cybersourcery/cybersource_signature_checker'
   require 'cybersourcery/reason_code_checker'
   require 'cybersourcery/container'
+  require 'cybersourcery/cybersource_params_normalizer'
 
   if Rails.env.test?
     require 'slim-rails'
