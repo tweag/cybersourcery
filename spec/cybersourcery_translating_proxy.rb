@@ -8,8 +8,11 @@ class CybersourceryTranslatingProxy < Rack::TranslatingProxy
 
   def request_mapping
     {
-      'http://localhost:5555' => target_host,
-      'http://cybersourcery.dev/confirm' => 'http://tranquil-ocean-5865.herokuapp.com/confirm',
+      # the proxy                what the target host thinks it is
+      'http://localhost:5555' => 'https://testsecureacceptance.cybersource.com',
+
+      # local confirmation page          page where Cybersource redirects
+      'http://localhost:3000/confirm' => 'http://tranquil-ocean-5865.herokuapp.com/confirm'
     }
   end
 end
