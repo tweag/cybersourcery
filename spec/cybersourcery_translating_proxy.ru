@@ -1,3 +1,0 @@
-require 'cybersourcery_translating_proxy'
-
-run CybersourceryTranslatingProxy.new
