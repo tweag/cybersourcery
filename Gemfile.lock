@@ -5,6 +5,18 @@ PATH
       rails (>= 3.1)
       ruby-hmac (~> 0.4.0)
 
+PATH
+  remote: ../cybersourcery_testing
+  specs:
+    cybersourcery_testing (0.0.1)
+      nokogiri
+      rack-translating_proxy
+      rakeup
+      shotgun
+      sinatra
+      vcr
+      webmock
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -96,6 +108,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
+    rakeup (1.2.0)
+      rack (~> 1.5.0)
+      rake (~> 10.3.0)
     rspec-core (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.3)
@@ -178,17 +193,12 @@ DEPENDENCIES
   capybara (~> 2.4.1)
   coffee-rails (~> 4.0.0)
   cybersourcery!
+  cybersourcery_testing!
   jquery-rails
-  nokogiri
-  rack-translating_proxy (~> 0.1.0)
   rake
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.2)
   selenium-webdriver (~> 2.42.0)
-  shotgun
   simple_form (~> 3.1.0.rc2)
-  sinatra
   slim-rails (~> 2.1.5)
   sqlite3
-  vcr
-  webmock

@@ -12,3 +12,9 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+
+# TODO: remove this from here and add it to the gemspec as a development dependency,
+# once the testing gem is released
+group :test, :development do
+  gem 'cybersourcery_testing', path: '/Users/toppa/Projects/cybersourcery_testing'
+end
