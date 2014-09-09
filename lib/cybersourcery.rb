@@ -23,6 +23,7 @@ if defined? Rails
     require 'sass-rails'
     require 'coffee-rails'
     require 'jquery-rails'
+    require 'dotenv-rails'
   end
 end
 
