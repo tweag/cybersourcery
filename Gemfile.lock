@@ -9,6 +9,7 @@ PATH
   remote: ../cybersourcery_testing
   specs:
     cybersourcery_testing (0.0.1)
+      dotenv
       nokogiri
       rack-translating_proxy
       rakeup
@@ -67,6 +68,9 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
     erubis (2.7.0)
     execjs (2.2.1)
     ffi (1.9.3)
@@ -194,6 +198,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   cybersourcery!
   cybersourcery_testing!
+  dotenv
   jquery-rails
   rake
   rspec-rails (~> 3.0.0)
