@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass-rails', '~> 4.0.2'
   s.add_development_dependency 'coffee-rails', '~> 4.0.0'
   s.add_development_dependency 'jquery-rails'
-  s.add_development_dependency 'dotenv'
+  s.add_development_dependency 'dotenv-rails'
   #s.add_development_dependency 'cybersourcery_testing'
 end
 
