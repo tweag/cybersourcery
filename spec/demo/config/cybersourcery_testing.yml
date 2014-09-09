@@ -2,4 +2,4 @@ translating_proxy_runner: rackup # or 'shotgun', if you want it to reload every 
 translating_proxy_port: 5555
 target_host_runner: ruby # or 'shotgun', if you want it to reload every time
 target_host_port: 5556
-spec_dir: spec
+
