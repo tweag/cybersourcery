@@ -21,7 +21,6 @@ feature 'Payments' do
       select '6', from: 'payment_card_expiry_dummy_2i'
       select '2015', from: 'payment_card_expiry_dummy_1i'
       fill_in 'card_cvn', with: '110'
-      select 'Visa', from: 'card_type'
       fill_in 'bill_to_email', with: 'public@toppa.com'
       select 'United States', from: 'bill_to_address_country'
       fill_in 'bill_to_address_line1', with: '123 Happy St'
@@ -32,16 +31,26 @@ feature 'Payments' do
 
     scenario 'Successfully completes a transaction with a valid credit card', js: true do
       fill_in 'card_number', with: '4111111111111111'
+      select 'Visa', from: 'card_type'
       click_button 'Submit'
 
       expect(page).to have_content 'Successful transaction'
     end
 
-    scenario 'Fails to complete a transaction with an invalid credit card', js: true do
+    scenario 'Fails to complete a transaction with an invalid credit card number', js: true do
       fill_in 'card_number', with: '4111111111111112'
+      select 'Visa', from: 'card_type'
       click_button 'Submit'
 
       expect(page).to have_content 'Declined: One or more fields in the request contains invalid data'
+    end
+
+    scenario 'Fails to complete a transaction with an invalid credit card type', js: true do
+      fill_in 'card_number', with: '4111111111111111'
+      select 'American Express', from: 'card_type'
+      click_button 'Submit'
+
+      expect(page).to have_content 'Invalid account number'
     end
   end
 end

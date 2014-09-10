@@ -29,11 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass-rails', '~> 4.0.2'
   s.add_development_dependency 'coffee-rails', '~> 4.0.0'
   s.add_development_dependency 'jquery-rails'
-  s.add_development_dependency 'rack-translating_proxy', '~> 0.1.0'
-  s.add_development_dependency 'sinatra'
-  s.add_development_dependency 'nokogiri'
-  s.add_development_dependency 'webmock'
-  s.add_development_dependency 'vcr'
-  s.add_development_dependency 'shotgun'
+  s.add_development_dependency 'dotenv-rails'
+  #s.add_development_dependency 'cybersourcery_testing'
 end
 

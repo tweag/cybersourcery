@@ -7,7 +7,6 @@ feature 'Cybersourcery configuration' do
     expect(Cybersourcery.configuration.sop_proxy_url).to eq 'http://localhost:5555'
     expect(Cybersourcery.configuration.sop_live_url).to eq 'https://secureacceptance.cybersource.com'
     expect(Cybersourcery.configuration.sop_test_url).to eq 'https://testsecureacceptance.cybersource.com'
-    expect(Cybersourcery.configuration.use_vcr_in_tests).to be_truthy
   end
 end
 

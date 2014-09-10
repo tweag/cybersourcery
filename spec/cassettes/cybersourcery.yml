@@ -308,4 +308,135 @@ http_interactions:
         </html>
     http_version: 
   recorded_at: Mon, 01 Sep 2014 12:53:37 GMT
+- request:
+    method: post
+    uri: https://testsecureacceptance.cybersource.com/silent/pay
+    body:
+      encoding: US-ASCII
+      string: utf8=%E2%9C%93&access_key=fa145f4dd72c390f8d83b41bbdd39ee6&profile_id=pwksgem&payment_method=card&locale=en-us&transaction_type=sale%2Ccreate_payment_token&currency=USD&amount=100&merchant_defined_data1=%7B%22pdf_url1%22%3A%22http%3A%2F%2Fpromptworks-pdf.herokuapp.com%2F%3Furl%3Dhttp%253A%252F%252Fancile.s3-website-us-east-1.amaz&merchant_defined_data2=onaws.com%252F%253Fselected_value_drivers%253Dsales_enablement%25252Corganizational_compliance%25252Centerpris&merchant_defined_data3=e_software_adoption%25252Cworkforce_management%2526value_drivers%253Dsales_enablement%2526value_drivers%253Dor&merchant_defined_data4=ganizational_compliance%2526value_drivers%253Denterprise_software_adoption%2526value_drivers%253Dworkforce_m&merchant_defined_data5=anagement%2526annual_revenue%253D10%25252C000%25252C000%2526employees%253D5%25252C000%2526sales_representatives%253D40&merchant_defined_data6=%2526average_amount_in_pipeline_per_sales_executive%253D5%25252C000%2526average_regulatory_fines_over_five_y&merchant_defined_data7=ears%253D1001000%2526average_cost_of_safety_incidents_over_five_years%253D2000000%2526weeks_to_new_software_&merchant_defined_data8=competency%253D8%2526employees_trained_in_first_year_for_new_software%253D200%2526average_support_tickets_cl&merchant_defined_data9=osed_per_day_per_person%253D8%2526support_staff%253D90%2526weeks_to_competency%253D14%2526employees_hired_per_ye&merchant_defined_data10=ar%253D100%2526percent_attrition_per_year%253D3%5Cu0026width%3D1170%5Cu0026height%3D2000%5Cu0026delay%3D500%5Cu0026forma&merchant_defined_data11=t%3Dpdf%22%2C%22pdf_url2%22%3A%22http%3A%2F%2Fpromptworks-pdf.herokuapp.com%2F%3Furl%3Dhttp%253A%252F%252Fsumtotal.s3-website-us-eas&merchant_defined_data12=t-1.amazonaws.com%252Fself_service.html%253Fselected_value_drivers%253Dresults%2526product_checked_state_lm%25&merchant_defined_data13=3D%2526product_checked_state_pm%253D%2526product_checked_state_cm%253D%2526product_checked_state_sp%253D%2526value&merchant_defined_data14=_drivers%253Ddriving_improved_performance_and_business_results%2526products%253Dlm%2526products%253Dpm%2526produ&merchant_defined_data15=cts%253Dsp%2526annual_revenue%253D1%25252C000%25252C000%25252C000%2526employees%253D10%25252C000%2526annual_attrition_ra&merchant_defined_data16=te%253D5%2526managers_with_direct_reports%253D1%25252C000%2526annual_instructor_led_courses_per_employee%253D5%252&merchant_defined_data17=6average_annual_training_courses_per_employee%253D5%2526number_of_ld_fte%253D32%2526percent_time_spent_on_ld&merchant_defined_data18=_admin%253D100%2526number_of_pm_fte%253D4%2526percent_time_spent_on_pm_admin%253D50%2526number_of_cm_fte%253D20%2526&merchant_defined_data19=percent_time_spent_on_cm_admin%253D30%2526percent_managers_time_spent_training_admin_for_reports%253D2%2526c&merchant_defined_data20=ost_to_replace_top_performer%253D10000%2526days_to_proficiency%253D21%2526guilty_fine_value%253D500000%2526annua&merchant_defined_data21=l_goals_per_employee%253D4%2526percent_probability_of_fine%253D2%2526top_performers_lost_per_year%253D60%2526ave&merchant_defined_data22=rage_annual_revenue_from_opening%253D5%25252C000%25252C000%2526annual_fines%253D500%2526annual_openings%253D2%22%7D&unsigned_field_names=bill_to_email%2Cbill_to_forename%2Cbill_to_surname%2Cbill_to_address_line1%2Cbill_to_address_line2%2Cbill_to_address_country%2Cbill_to_address_state%2Cbill_to_address_postal_code%2Cbill_to_address_city%2Ccard_cvn%2Ccard_expiry_date%2Ccard_number%2Ccard_type&transaction_uuid=34b4782cc90493bde86538817bae7d25&reference_number=f29a40529adf4e6697fd85815c1131c2&signed_field_names=access_key%2Cprofile_id%2Cpayment_method%2Clocale%2Ctransaction_type%2Ccurrency%2Camount%2Cmerchant_defined_data1%2Cmerchant_defined_data2%2Cmerchant_defined_data3%2Cmerchant_defined_data4%2Cmerchant_defined_data5%2Cmerchant_defined_data6%2Cmerchant_defined_data7%2Cmerchant_defined_data8%2Cmerchant_defined_data9%2Cmerchant_defined_data10%2Cmerchant_defined_data11%2Cmerchant_defined_data12%2Cmerchant_defined_data13%2Cmerchant_defined_data14%2Cmerchant_defined_data15%2Cmerchant_defined_data16%2Cmerchant_defined_data17%2Cmerchant_defined_data18%2Cmerchant_defined_data19%2Cmerchant_defined_data20%2Cmerchant_defined_data21%2Cmerchant_defined_data22%2Cunsigned_field_names%2Ctransaction_uuid%2Creference_number%2Csigned_field_names%2Csigned_date_time&signed_date_time=2014-09-10T05%3A05%3A57Z&signature=ug9T3LuYdB5AXFAS7DbE6ApLOVfeK%2FwsPbvzW23qoYc%3D&bill_to_forename=Michael&bill_to_surname=Toppa&card_number=4111111111111111&card_expiry_date=06-2015&card_cvn=110&card_type=003&bill_to_phone=&bill_to_email=public%40toppa.com&bill_to_address_country=US&bill_to_address_line1=123+Happy+St&bill_to_address_line2=&bill_to_address_city=Havertown&bill_to_address_state=PA&bill_to_address_postal_code=19083&commit=Submit&splat=silent%2Fpay&captures=silent%2Fpay
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+      Host:
+      - testsecureacceptance.cybersource.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Set-Cookie:
+      - JSESSIONID=EFD4AC2326A6CFDB49633E5B731477B6; Path=/; Secure; HttpOnly
+      - _op_aixPageId=a_f9ec7474-5912-4394-a597-1441abefa982; Path=/
+      Strict-Transport-Security:
+      - max-age=31536000
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Request-Id:
+      - 186ba370085c72d821aaa8c9b8bfb5a4
+      X-Runtime:
+      - '0.545000'
+      Date:
+      - Wed, 10 Sep 2014 05:06:02 GMT
+      X-Rack-Cache:
+      - invalidate, pass
+      Content-Type:
+      - text/html;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE html>
+        <!---------------------------------------------------------------------
+        - Copyright 2012 CyberSource Corporation.  All rights reserved.
+        --------------------------------------------------------------------->
+        <html>
+        <head>
+            <title></title>
+            <meta content="authenticity_token" name="csrf-param" />
+        <meta content="QwUb9d1Vut7ehv9dyIKidmP0FvHtKxYZ9U3X3bBkUMM=" name="csrf-token" />
+        </head>
+        <body>
+
+
+
+        <form accept-charset="UTF-8" action="http://tranquil-ocean-5865.herokuapp.com/confirm" id="custom_redirect" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+                <input id="req_card_number" name="req_card_number" type="hidden" value="xxxxxxxxxxxx1111" />
+                <input id="req_card_expiry_date" name="req_card_expiry_date" type="hidden" value="06-2015" />
+                <input id="req_bill_to_address_state" name="req_bill_to_address_state" type="hidden" value="PA" />
+                <input id="signed_field_names" name="signed_field_names" type="hidden" value="transaction_id,decision,req_access_key,req_profile_id,req_transaction_uuid,merchant_id,req_transaction_type,req_reference_number,req_amount,req_currency,req_locale,req_payment_method,req_bill_to_forename,req_bill_to_surname,req_bill_to_email,req_bill_to_address_line1,req_bill_to_address_city,req_bill_to_address_state,req_bill_to_address_country,req_bill_to_address_postal_code,req_card_number,req_card_type,req_card_expiry_date,req_merchant_defined_data1,req_merchant_defined_data2,req_merchant_defined_data3,req_merchant_defined_data4,req_merchant_defined_data5,req_merchant_defined_data6,req_merchant_defined_data7,req_merchant_defined_data8,req_merchant_defined_data9,req_merchant_defined_data10,req_merchant_defined_data11,req_merchant_defined_data12,req_merchant_defined_data13,req_merchant_defined_data14,req_merchant_defined_data15,req_merchant_defined_data16,req_merchant_defined_data17,req_merchant_defined_data18,req_merchant_defined_data19,req_merchant_defined_data20,req_merchant_defined_data21,req_merchant_defined_data22,message,reason_code,signed_field_names,signed_date_time" />
+                <input id="req_payment_method" name="req_payment_method" type="hidden" value="card" />
+                <input id="req_merchant_defined_data12" name="req_merchant_defined_data12" type="hidden" value="t-1.amazonaws.com%2Fself_service.html%3Fselected_value_drivers%3Dresults%26product_checked_state_lm%" />
+                <input id="req_merchant_defined_data11" name="req_merchant_defined_data11" type="hidden" value="t=pdf&quot;,&quot;pdf_url2&quot;:&quot;http://promptworks-pdf.herokuapp.com/?url=http%3A%2F%2Fsumtotal.s3-website-us-eas" />
+                <input id="req_merchant_defined_data10" name="req_merchant_defined_data10" type="hidden" value="ar%3D100%26percent_attrition_per_year%3D3\u0026width=1170\u0026height=2000\u0026delay=500\u0026forma" />
+                <input id="req_merchant_defined_data16" name="req_merchant_defined_data16" type="hidden" value="te%3D5%26managers_with_direct_reports%3D1%252C000%26annual_instructor_led_courses_per_employee%3D5%2" />
+                <input id="req_merchant_defined_data15" name="req_merchant_defined_data15" type="hidden" value="cts%3Dsp%26annual_revenue%3D1%252C000%252C000%252C000%26employees%3D10%252C000%26annual_attrition_ra" />
+                <input id="req_merchant_defined_data14" name="req_merchant_defined_data14" type="hidden" value="_drivers%3Ddriving_improved_performance_and_business_results%26products%3Dlm%26products%3Dpm%26produ" />
+                <input id="req_merchant_defined_data13" name="req_merchant_defined_data13" type="hidden" value="3D%26product_checked_state_pm%3D%26product_checked_state_cm%3D%26product_checked_state_sp%3D%26value" />
+                <input id="req_merchant_defined_data19" name="req_merchant_defined_data19" type="hidden" value="percent_time_spent_on_cm_admin%3D30%26percent_managers_time_spent_training_admin_for_reports%3D2%26c" />
+                <input id="signature" name="signature" type="hidden" value="avdZRYCcuIVmL5FzVVo5Bxl8tJMoxPb85XoHJsW7KwY=" />
+                <input id="req_merchant_defined_data18" name="req_merchant_defined_data18" type="hidden" value="_admin%3D100%26number_of_pm_fte%3D4%26percent_time_spent_on_pm_admin%3D50%26number_of_cm_fte%3D20%26" />
+                <input id="req_merchant_defined_data17" name="req_merchant_defined_data17" type="hidden" value="6average_annual_training_courses_per_employee%3D5%26number_of_ld_fte%3D32%26percent_time_spent_on_ld" />
+                <input id="req_bill_to_address_postal_code" name="req_bill_to_address_postal_code" type="hidden" value="19083" />
+                <input id="reason_code" name="reason_code" type="hidden" value="231" />
+                <input id="req_card_type" name="req_card_type" type="hidden" value="003" />
+                <input id="req_bill_to_address_line1" name="req_bill_to_address_line1" type="hidden" value="123 Happy St" />
+                <input id="req_bill_to_address_city" name="req_bill_to_address_city" type="hidden" value="Havertown" />
+                <input id="signed_date_time" name="signed_date_time" type="hidden" value="2014-09-10T05:06:02Z" />
+                <input id="req_currency" name="req_currency" type="hidden" value="USD" />
+                <input id="transaction_id" name="transaction_id" type="hidden" value="4103255621260176195662" />
+                <input id="req_profile_id" name="req_profile_id" type="hidden" value="pwksgem" />
+                <input id="req_transaction_uuid" name="req_transaction_uuid" type="hidden" value="34b4782cc90493bde86538817bae7d25" />
+                <input id="req_bill_to_surname" name="req_bill_to_surname" type="hidden" value="Toppa" />
+                <input id="req_bill_to_email" name="req_bill_to_email" type="hidden" value="public@toppa.com" />
+                <input id="req_bill_to_forename" name="req_bill_to_forename" type="hidden" value="Michael" />
+                <input id="req_access_key" name="req_access_key" type="hidden" value="fa145f4dd72c390f8d83b41bbdd39ee6" />
+                <input id="req_bill_to_address_country" name="req_bill_to_address_country" type="hidden" value="US" />
+                <input id="decision" name="decision" type="hidden" value="DECLINE" />
+                <input id="req_merchant_defined_data7" name="req_merchant_defined_data7" type="hidden" value="ears%3D1001000%26average_cost_of_safety_incidents_over_five_years%3D2000000%26weeks_to_new_software_" />
+                <input id="req_merchant_defined_data6" name="req_merchant_defined_data6" type="hidden" value="%26average_amount_in_pipeline_per_sales_executive%3D5%252C000%26average_regulatory_fines_over_five_y" />
+                <input id="req_merchant_defined_data9" name="req_merchant_defined_data9" type="hidden" value="osed_per_day_per_person%3D8%26support_staff%3D90%26weeks_to_competency%3D14%26employees_hired_per_ye" />
+                <input id="req_merchant_defined_data8" name="req_merchant_defined_data8" type="hidden" value="competency%3D8%26employees_trained_in_first_year_for_new_software%3D200%26average_support_tickets_cl" />
+                <input id="req_transaction_type" name="req_transaction_type" type="hidden" value="sale,create_payment_token" />
+                <input id="merchant_id" name="merchant_id" type="hidden" value="sgns_1" />
+                <input id="req_locale" name="req_locale" type="hidden" value="en-us" />
+                <input id="req_reference_number" name="req_reference_number" type="hidden" value="f29a40529adf4e6697fd85815c1131c2" />
+                <input id="req_merchant_defined_data22" name="req_merchant_defined_data22" type="hidden" value="rage_annual_revenue_from_opening%3D5%252C000%252C000%26annual_fines%3D500%26annual_openings%3D2&quot;}" />
+                <input id="req_merchant_defined_data1" name="req_merchant_defined_data1" type="hidden" value="{&quot;pdf_url1&quot;:&quot;http://promptworks-pdf.herokuapp.com/?url=http%3A%2F%2Fancile.s3-website-us-east-1.amaz" />
+                <input id="req_merchant_defined_data20" name="req_merchant_defined_data20" type="hidden" value="ost_to_replace_top_performer%3D10000%26days_to_proficiency%3D21%26guilty_fine_value%3D500000%26annua" />
+                <input id="req_merchant_defined_data21" name="req_merchant_defined_data21" type="hidden" value="l_goals_per_employee%3D4%26percent_probability_of_fine%3D2%26top_performers_lost_per_year%3D60%26ave" />
+                <input id="req_merchant_defined_data4" name="req_merchant_defined_data4" type="hidden" value="ganizational_compliance%26value_drivers%3Denterprise_software_adoption%26value_drivers%3Dworkforce_m" />
+                <input id="req_merchant_defined_data5" name="req_merchant_defined_data5" type="hidden" value="anagement%26annual_revenue%3D10%252C000%252C000%26employees%3D5%252C000%26sales_representatives%3D40" />
+                <input id="req_merchant_defined_data2" name="req_merchant_defined_data2" type="hidden" value="onaws.com%2F%3Fselected_value_drivers%3Dsales_enablement%252Corganizational_compliance%252Centerpris" />
+                <input id="req_amount" name="req_amount" type="hidden" value="100" />
+                <input id="req_merchant_defined_data3" name="req_merchant_defined_data3" type="hidden" value="e_software_adoption%252Cworkforce_management%26value_drivers%3Dsales_enablement%26value_drivers%3Dor" />
+                <input id="message" name="message" type="hidden" value="The field is invalid: card_type,customer_cc_number" />
+            <noscript>
+                <p>Your browser does not support JavaScript. Click the button below to continue.</p>
+                <input name="commit" type="submit" value="Continue" />
+            </noscript>
+        </form><script type="text/javascript">
+            window.onload = function(){
+                document.forms['custom_redirect'].submit();
+            }
+        </script>
+
+        </body>
+        </html>
+    http_version: 
+  recorded_at: Wed, 10 Sep 2014 05:06:02 GMT
 recorded_with: VCR 2.9.2

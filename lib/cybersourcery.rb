@@ -23,10 +23,7 @@ if defined? Rails
     require 'sass-rails'
     require 'coffee-rails'
     require 'jquery-rails'
-    require 'nokogiri'
-    require 'webmock'
-    require 'vcr'
-    require 'shotgun'
+    require 'dotenv-rails'
   end
 end
 

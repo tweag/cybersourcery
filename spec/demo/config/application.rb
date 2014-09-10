@@ -8,7 +8,11 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
-require "cybersourcery"
+
+# For a typical rails app this line is not needed.
+# It's only needed here because dotenv-rails is looking for it in the gem root, not spec/demo.
+# By default the proxy servers started in the rake task *will* automatically find it in spec/demo.
+Dotenv.load "spec/demo/.env" if defined? Dotenv
 
 module Demo
   class Application < Rails::Application
