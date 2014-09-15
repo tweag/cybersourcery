@@ -40,11 +40,11 @@ module Cybersourcery
 
     def transaction_url(env = Rails.env)
       if env == 'test'
-        "#{Cybersourcery.configuration.sop_proxy_url}#{VALID_ENDPOINTS[@endpoint_type]}"
+        "#{ENV['CYBERSOURCERY_SOP_PROXY_URL']}#{VALID_ENDPOINTS[@endpoint_type]}"
       elsif @service == 'live'
-        "#{Cybersourcery.configuration.sop_live_url}#{VALID_ENDPOINTS[@endpoint_type]}"
+        "#{ENV['CYBERSOURCERY_SOP_LIVE_URL']}#{VALID_ENDPOINTS[@endpoint_type]}"
       elsif @service == 'test'
-        "#{Cybersourcery.configuration.sop_test_url}#{VALID_ENDPOINTS[@endpoint_type]}"
+        "#{ENV['CYBERSOURCERY_SOP_TEST_URL']}#{VALID_ENDPOINTS[@endpoint_type]}"
       else
         raise Cybersourcery::CybersourceryError, 'Invalid conditions for determining the transaction_url'
       end
