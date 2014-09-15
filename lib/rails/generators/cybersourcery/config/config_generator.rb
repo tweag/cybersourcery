@@ -1,7 +1,7 @@
 module Cybersourcery
   module Generators
     class ConfigGenerator < Rails::Generators::Base
-      desc 'Creates a Cybersourcery gem configuration file at config/cybersourcery_profiles.yml, and an initializer at config/initializers/cybersourcery.rb'
+      desc 'Creates a configuration file and an initializer file for the Cybersourcery gem'
 
       def self.source_root
         @source_root ||= File.expand_path('../templates', __FILE__)
