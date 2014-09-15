@@ -9,9 +9,9 @@ Cybersourcery takes care of the most difficult aspects of working with Cybersour
 * It handles signing fields and checking signatures.
 * It provides a non-persisted model for the credit card form, making it easy to use Rails' model validations with your form.
 * It provides non-technical, human readable messages for the Cybersource error codes.
-* It provides several form helper methods, for a country select list, US states select list, date fields appropriate form credit card expiry dates, and helpers for use with Simple Form.
-* It provides optional data security features for use when users transition from your shopping cart to your credit card payment form, to ensure no one has tampered with fields such as the payment amount.
-* If you have merchant data that exceeds the 100 character limit on the Cybersource `merchant_defined_data` fields, it provides features that support seamlessly serializing and unserializing your data across multiple merchant data fields.
+* It provides several form helper methods, for a country select list, US states select list, date fields appropriate for credit card expiry dates, and helpers for use with Simple Form.
+* It provides optional data security features for submitting data from your shopping cart to your credit card payment form, to ensure no one has tampered with fields such as the payment amount.
+* If you have merchant data that exceeds the 100 character limit on the Cybersource `merchant_defined_data` fields, it provides features that support seamlessly serializing and deserializing your data across multiple merchant data fields.
 * If you use it in conjunction with [the Cybersourcery Testing gem](https://github.com/promptworks/cybersourcery_testing), you can set up repeatable feature/integration tests. The testing gem uses a proxy server and VCR, so you do not need to repeatedly hit the Cybersource test service itself in your tests.
 
 ## Demo versions
@@ -32,7 +32,7 @@ If you download the gem with its development dependencies, you will get a workin
   rails generate cybersourcery:config
   ```
   
-  This generates 2 files: `config/cybersourcery_profiles.yml` and `config/initializers/cybersourcery.rb`
+  This generates 2 files: `config/cybersourcery_profiles.yml` and `config/initializers/cybersourcery.rb`.
 
 3. Add information about your Cybersource profiles to the `config/cybersourcery_profiles.yml` file. You must first create these profiles in the Cybersource Business Center. We recommend that **you do not check this file into version control**, since it will contain sensitive data about your Cybersource profiles.
 
