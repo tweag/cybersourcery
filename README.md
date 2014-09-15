@@ -93,18 +93,18 @@ Key points:
 
 1. Add the following to your controller:
 
-        ```ruby
-        skip_before_filter :verify_authenticity_token, only: :confirm
-        before_action :normalize_cybersource_params, only: :confirm
+  ```ruby
+  skip_before_filter :verify_authenticity_token, only: :confirm
+  before_action :normalize_cybersource_params, only: :confirm
 
-        [...]
-        
-        private
+  [...]
 
-        def normalize_cybersource_params
-          Cybersourcery::CybersourceParamsNormalizer.run(params)
-        end
-        ```
+  private
+
+  def normalize_cybersource_params
+    Cybersourcery::CybersourceParamsNormalizer.run(params)
+  end
+  ```
 
   Since the POST is from Cybersource, there is no reason to check for a Rails authenticity token.
   
@@ -112,15 +112,15 @@ Key points:
   
 2. A minimal method for handling the response would look like this:
 
-        ```ruby
-          def confirm
-            signature_checker = Cybersourcery::Container.get_cybersource_signature_checker('pwksgem', params)
-            signature_checker.run!
-            flash.now[:notice] = Cybersourcery::ReasonCodeChecker::run!(params[:reason_code])
-          rescue Cybersourcery::CybersourceryError => e
-            flash.now[:alert] = e.message
-          end
-          ```
+  ```ruby
+    def confirm
+      signature_checker = Cybersourcery::Container.get_cybersource_signature_checker('pwksgem', params)
+      signature_checker.run!
+      flash.now[:notice] = Cybersourcery::ReasonCodeChecker::run!(params[:reason_code])
+    rescue Cybersourcery::CybersourceryError => e
+      flash.now[:alert] = e.message
+    end
+    ```
 
 There are two possible exceptions that can be thrown here, and the `rescue` block will catch either of them. One possibility is that the signatures fail to match, which indicates data tampering. The other possibility is that the transaction failed, due to an expired credit card, or some other reason. In either case, an appropriate flash message will be created (a flash `alert` for an error, and a flash `notice` for a successful transaction). The ReasonCodeChecker provides user friendly explanations of why the transaction failed
 
@@ -130,10 +130,10 @@ If you prefer to not have exceptions thrown for error conditions, you can call `
 
 4. Optionally, you can redirect the user to a different URL after a successful transaction. This can be determined dynamically from the profile data. This can be useful if the page shown to users after a transaction needs to vary by the Cybersource profile.
 
-        ```ruby
-        profile = Cybersourcery::Profile.new('pwksgem')
-        redirect_to profile.success_url
-        ```
+  ```ruby
+  profile = Cybersourcery::Profile.new('pwksgem')
+  redirect_to profile.success_url
+  ```
 
 ### Optional: Securely submitting the transaction amount to your credit card form
 
@@ -141,13 +141,14 @@ Cybersourcery provides an optional feature to simplify securely populating the `
 
 Here is an example, for creating `@signed_fields` to include in a simple shopping cart form that will submit to the credit card payment form:
 
-        ```ruby
-        def new
-          cart_fields = {amount: 100, merchant_defined_data1: 'foo' }
-          cart_signer = Cybersourcery::Container.get_cart_signer('pwksgem', session, cart_fields)
-          @signed_fields = cart_signer.run
-        end
-        ```  
+  ```ruby
+  def new
+    cart_fields = {amount: 100, merchant_defined_data1: 'foo' }
+    cart_signer = Cybersourcery::Container.get_cart_signer('pwksgem', session, cart_fields)
+    @signed_fields = cart_signer.run
+  end
+  ```  
+
 If the credit card transaction fails, and you send your user back to the credit card form, Cybersourcery makes it easy to re-create the state of the cart form submission that precedes the display of the credit card form. See the `setup_payment_form` method in [the demo project's PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb).
 
 ### Optional: Serializing merchant defined data
