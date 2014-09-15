@@ -1,4 +1,9 @@
 $ ->
+  # strip non-numeric characters from the credit card field
+  $('#payment_card_number').change ->
+    value = $(this).val().replace(/[^\d\.]/g, '')
+    $(this).val(value)
+
   # only show a drop down list of states if the selected country is the US
   $('#payment_bill_to_address_country').change ->
     if $(this).val() == 'US'
