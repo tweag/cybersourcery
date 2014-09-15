@@ -153,3 +153,11 @@ If the credit card transaction fails, and you send your user back to the credit 
 ### Optional: Serializing merchant defined data
 
 Cybersource's `merchant_defined_data` fields have a 100 character limit. If you need to use longer values (such as long URLs), Cybersourcery can serialize them across multiple fields for you, and deserialize them when the transaction is complete. See the demo project's `new` method in [the CartsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/carts_controller.rb) for a serializing example, and the `confirm` method in [the PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb) for a deserializing example.
+
+## Contributing
+
+1. Fork it ( https://github.com/[my-github-username]/cybersourcery/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
