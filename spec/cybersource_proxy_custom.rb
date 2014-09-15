@@ -1,4 +1,3 @@
-require 'sinatra' # weird - why do we have to require sinatra here too?
 require 'cybersourcery_testing/cybersource_proxy'
 
 VCR.configure do |c|
