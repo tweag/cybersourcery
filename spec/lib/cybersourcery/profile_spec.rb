@@ -52,23 +52,33 @@ describe Cybersourcery::Profile do
     end
   end
 
+  # The arguments to transaction_url are normally not needed, as they are determined from the
+  # environment. The arguments are to facilitate testing only.
   describe '#transaction_url' do
-    it 'returns the Sorcery transaction URL, in the test environment' do
+    it 'returns the Cybersource proxy server URL, when in the test environment, if the proxy server URL is defined' do
       profile = Cybersourcery::Profile.new('pwksgem', profiles)
-      expect(profile.transaction_url).to eq 'http://localhost:5556/silent/pay'
+      transaction_url = profile.transaction_url('http://localhost:5556')
+      expect(transaction_url).to eq 'http://localhost:5556/silent/pay'
     end
 
-    it 'returns the "test" service URL, when not in the test environment' do
+    it 'returns the "test" service URL, when in the test environment, if the proxy server URL is not defined' do
       profiles['pwksgem']['service'] = 'test'
       profile = Cybersourcery::Profile.new('pwksgem', profiles)
-      transaction_url = profile.transaction_url('development')
+      transaction_url = profile.transaction_url(nil)
       expect(transaction_url).to eq 'https://testsecureacceptance.cybersource.com/silent/pay'
     end
 
-    it 'returns the "live" service URL, when not in the test environment' do
+    it 'returns the "test" service URL, when not in the test environment, if the profile is set to use the test server' do
+      profiles['pwksgem']['service'] = 'test'
+      profile = Cybersourcery::Profile.new('pwksgem', profiles)
+      transaction_url = profile.transaction_url(nil, 'development')
+      expect(transaction_url).to eq 'https://testsecureacceptance.cybersource.com/silent/pay'
+    end
+
+    it 'returns the "live" service URL, when not in the test environment, if the profile is set to use the live server' do
       profiles['pwksgem']['service'] = 'live'
       profile = Cybersourcery::Profile.new('pwksgem', profiles)
-      transaction_url = profile.transaction_url('development')
+      transaction_url = profile.transaction_url(nil, 'development')
       expect(transaction_url).to eq 'https://secureacceptance.cybersource.com/silent/pay'
     end
   end
