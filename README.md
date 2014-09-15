@@ -20,10 +20,11 @@ If you download the gem with its development dependencies, you will get a workin
 
 ## Installation and setup
 
-1. Add it to your Gemfile:
+1. Add it to your Gemfile and run bundle:
 
   ```ruby
   gem 'cybersourcery'
+  bundle
   ```
 
 2. Run the config generator:
@@ -135,7 +136,7 @@ If you prefer to not have exceptions thrown for error conditions, you can call `
   redirect_to profile.success_url
   ```
 
-### Optional: Securely submitting the transaction amount to your credit card form
+## Optional: Securely submitting the transaction amount to your credit card form
 
 Cybersourcery provides an optional feature to simplify securely populating the `amount` field in the credit card payment form. In the demo project, the controller method for displaying the credit card form accepts a POST. It receives data from an extremely simple "shopping cart" form. Cybersourcery signs and verifies the submission from the cart page to the credit card form page in the same manner as the credit card form submission to Cybersource. The reason for this is the `amount` field should be a signed field in the Cybersource transaction, and in a typical use case, the `amount` value will be determined before the user arrives at the credit card form. So we need a way to securely pass the `amount` to the credit card form. The typical solution for this is to not pass the amount through the front-end, but with Cybersource, this can complicate the process of making sure the `amount` field is included in the signed fields (so we'll know it has not been tampered with) . Cybersourcery's signing solution provides a secure way to handle the `amount` through the front-end. Note you can also include `merchant_defined_data` fields, and any other fields you might want, for signing.
 
@@ -151,7 +152,7 @@ Here is an example, for creating `@signed_fields` to include in a simple shoppin
 
 If the credit card transaction fails, and you send your user back to the credit card form, Cybersourcery makes it easy to re-create the state of the cart form submission that precedes the display of the credit card form. See the `setup_payment_form` method in [the demo project's PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb).
 
-### Optional: Serializing merchant defined data
+## Optional: Serializing merchant defined data
 
 Cybersource's `merchant_defined_data` fields have a 100 character limit. If you need to use longer values (such as long URLs), Cybersourcery can serialize them across multiple fields for you, and deserialize them when the transaction is complete. See the demo project's `new` method in [the CartsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/carts_controller.rb) for a serializing example, and the `confirm` method in [the PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb) for a deserializing example.
 
