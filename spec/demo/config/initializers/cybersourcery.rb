@@ -1,3 +1,3 @@
 Cybersourcery.configure do |config|
-  config.profiles = "#{Rails.root}/config/cybersourcery_profiles.yml"
+  config.profiles_path = "#{Rails.root}/config/cybersourcery_profiles.yml"
 end

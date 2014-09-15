@@ -1,9 +1,9 @@
 module Cybersourcery
   class Configuration
-    attr_reader :profiles
+    attr_accessor :profiles_path
 
-    def profiles=(profiles_path)
-      @profiles = YAML.load_file profiles_path
+    def profiles
+      @profiles ||= YAML.load_file profiles_path
     end
   end
 end
