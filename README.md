@@ -1,6 +1,6 @@
 # Cybersourcery
 
-A pain removal gem for working with Cybersource Secure Acceptance Silent Order POST. Provides Cybersource proxy services, using VCR, for automated testing.
+A pain removal gem for working with Cybersource Secure Acceptance Silent Order POST.
 
 ## Features
 
@@ -10,11 +10,13 @@ Cybersourcery takes care of the most difficult aspects of working with Cybersour
 * It provides a non-persisted model for the credit card form, making it easy to use Rails' model validations with your form.
 * It provides non-technical, human readable messages for the Cybersource error codes.
 * It provides several form helper methods, for a country select list, US states select list, date fields appropriate form credit card expiry dates, and helpers for use with Simple Form.
-* For testing, it gives you the tools for setting up repeatable feature/integration tests via the use of proxy servers and VCR, so you do not need to repeatedly hit the Cybersource test service itself in your tests.
 * It provides optional data security features for use when users transition from your shopping cart to your credit card payment form, to ensure no one has tampered with fields such as the payment amount.
 * If you have merchant data that exceeds the 100 character limit on the Cybersource `merchant_defined_data` fields, it provides features that support seamlessly serializing and unserializing your data across multiple merchant data fields.
- 
-If you download the gem with its development dependencies, you will get a working demo site. Alternately, a working demo site is available directly here -ADD LINK-
+* If you use it in conjunction with [the Cybersourcery Testing gem](https://github.com/promptworks/cybersourcery_testing), you can set up repeatable feature/integration tests. The testing gem uses a proxy server and VCR, so you do not need to repeatedly hit the Cybersource test service itself in your tests.
+
+## Demo versions
+
+If you download the gem with its development dependencies, you will get a working demo site, in spec/demo. Alternately, [a stand-alone, working demo site is available](https://github.com/promptworks/cybersourcery_demo_site).
 
 ## Installation and setup
 
@@ -106,7 +108,7 @@ Key points:
 
   Since the POST is from Cybersource, there is no reason to check for a Rails authenticity token.
   
-  The `CybersourceParamsNormalizer` copies and adds param names that start with "req_", and removes "req_" from them, so they have consistent naming, which simplifies internal handling.
+  The `CybersourceParamsNormalizer` copies and adds param names that start with "req_", and removes "req_" from them, so they have consistent naming across contexts, which simplifies internal handling.
   
 2. A minimal method for handling the response would look like this:
 
@@ -120,19 +122,34 @@ Key points:
           end
           ```
 
-There are two possible exceptions that can be thrown here, and the `rescue` block will catch either of them. One possibility is that the signatures fail to match, which indicates data tampering. The other possibility is that the transaction failed, due to an expired credit card, or some other reason. In either case, an appropriate flash message will be created (a flash `alert` for an error, and a flash `notice` for a successful transaction).
+There are two possible exceptions that can be thrown here, and the `rescue` block will catch either of them. One possibility is that the signatures fail to match, which indicates data tampering. The other possibility is that the transaction failed, due to an expired credit card, or some other reason. In either case, an appropriate flash message will be created (a flash `alert` for an error, and a flash `notice` for a successful transaction). The ReasonCodeChecker provides user friendly explanations of why the transaction failed
 
 If you prefer to not have exceptions thrown for error conditions, you can call `run` (without the exclamation point) on the SignatureChecker or the ReasonCodeChecker.
 
-3. Typically, you will want to display the credit card form again if there is a problem with the transaction, so the user can try again. See the [PaymentsController's confirm method in the demo project](https://github.com/promptworks/cybersourcery/blob/master/spec/demo/app/controllers/payments_controller.rb) for an example of how to do this.
+3. Typically, you will want to display the credit card form again if there is a problem with the transaction, so the user can try again. See the [PaymentsController's `confirm` method in the demo project](https://github.com/promptworks/cybersourcery/blob/master/spec/demo/app/controllers/payments_controller.rb) for an example of how to do this.
 
-4. Optionally, you can redirect the user to a different URL after a successful transaction. This can be determined dynamically from the profile data. This can be useful, for example, if users should be directed to a page on a different server after the transaction is complete, and it varies by profile.
+4. Optionally, you can redirect the user to a different URL after a successful transaction. This can be determined dynamically from the profile data. This can be useful if the page shown to users after a transaction needs to vary by the Cybersource profile.
 
         ```ruby
         profile = Cybersourcery::Profile.new('pwksgem')
         redirect_to profile.success_url
         ```
 
-### Securely submitting initial transaction data to your credit card form
+### Optional: Securely submitting the transaction amount to your credit card form
 
-In the demo project, the controller method for displaying the credit card form accepts a POST. It receives data from an extremely simple "shopping cart" form. The reason for this is the `amount` field should be a signed field in the Cybersource transaction, and in a typical use case, the `amount` value will be determined before the user arrives at the credit card form. So we need a way to securely pass the `amount` to the credit card form.
+Cybersourcery provides an optional feature to simplify securely populating the `amount` field in the credit card payment form. In the demo project, the controller method for displaying the credit card form accepts a POST. It receives data from an extremely simple "shopping cart" form. Cybersourcery signs and verifies the submission from the cart page to the credit card form page in the same manner as the credit card form submission to Cybersource. The reason for this is the `amount` field should be a signed field in the Cybersource transaction, and in a typical use case, the `amount` value will be determined before the user arrives at the credit card form. So we need a way to securely pass the `amount` to the credit card form. The typical solution for this is to not pass the amount through the front-end, but with Cybersource, this can complicate the process of making sure the `amount` field is included in the signed fields (so we'll know it has not been tampered with) . Cybersourcery's signing solution provides a secure way to handle the `amount` through the front-end. Note you can also include `merchant_defined_data` fields, and any other fields you might want, for signing.
+
+Here is an example, for creating `@signed_fields` to include in a simple shopping cart form that will submit to the credit card payment form:
+
+        ```ruby
+        def new
+          cart_fields = {amount: 100, merchant_defined_data1: 'foo' }
+          cart_signer = Cybersourcery::Container.get_cart_signer('pwksgem', session, cart_fields)
+          @signed_fields = cart_signer.run
+        end
+        ```  
+If the credit card transaction fails, and you send your user back to the credit card form, Cybersourcery makes it easy to re-create the state of the cart form submission that precedes the display of the credit card form. See the `setup_payment_form` method in [the demo project's PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb).
+
+### Optional: Serializing merchant defined data
+
+Cybersource's `merchant_defined_data` fields have a 100 character limit. If you need to use longer values (such as long URLs), Cybersourcery can serialize them across multiple fields for you, and deserialize them when the transaction is complete. See the demo project's `new` method in [the CartsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/carts_controller.rb) for a serializing example, and the `confirm` method in [the PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb) for a deserializing example.
