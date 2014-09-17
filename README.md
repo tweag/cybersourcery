@@ -86,7 +86,7 @@ Key points:
 
 * The form `action` URL is determined based on the information provided in `cybersourcery_profiles.yml`.
 * Calling the `add_signed_fields` helper method is crucial, for passing the signature and signed fields to Cybersource.
-* Cybersourcery provides support for HTML5 front-end validation, but no specific approach to front-end form validation is required. As mentioned above, you can subclass the non-persisted Payment model to add your fields and indicate which are required.
+* Cybersourcery provides support for HTML5 front-end validation, but no specific approach to front-end form validation is required. As mentioned above, you can subclass the non-persisted Payment model to add your own fields and indicate which are required.
 * The optional call to the `add_expiry_date_fields` helper method makes it easy to include a month and date picker in your form that's [appropriate for indicating credit card expiry dates](http://baymard.com/blog/how-to-format-expiration-date-fields). Used in conjunction with [this javascript from the demo project](https://github.com/promptworks/cybersourcery/blob/master/spec/demo/app/assets/javascripts/payments.js.coffee), it will then submit a date in the user-unfriendly format that Cybersource requires.
 * The javascript file in the demo project also provides dynamic switching of the input type for the "State" field, based on whether the US is selected as the country (it provides a select list of states for the US, or a text input field for other countries).
 * The `field_pattern` and `field_validation_message` methods in the [PaymentsHelper](https://github.com/promptworks/cybersourcery/blob/master/lib/cybersourcery/payments_helper.rb) include only one pattern matching requirement, for the credit card number format. You can add your own pattern matching rules by overriding these methods, [like this](http://stackoverflow.com/questions/10471535/override-rails-helpers-with-access-to-original#10525284). 
@@ -115,14 +115,14 @@ Key points:
 2. A minimal method for handling the response would look like this:
 
   ```ruby
-    def confirm
-      signature_checker = Cybersourcery::Container.get_cybersource_signature_checker('pwksgem', params)
-      signature_checker.run!
-      flash.now[:notice] = Cybersourcery::ReasonCodeChecker::run!(params[:reason_code])
-    rescue Cybersourcery::CybersourceryError => e
-      flash.now[:alert] = e.message
-    end
-    ```
+  def confirm
+    signature_checker = Cybersourcery::Container.get_cybersource_signature_checker('pwksgem', params)
+    signature_checker.run!
+    flash.now[:notice] = Cybersourcery::ReasonCodeChecker::run!(params[:reason_code])
+  rescue Cybersourcery::CybersourceryError => e
+    flash.now[:alert] = e.message
+  end
+  ```
 
 There are two possible exceptions that can be thrown here, and the `rescue` block will catch either of them. One possibility is that the signatures fail to match, which indicates data tampering. The other possibility is that the transaction failed, due to an expired credit card, or some other reason. In either case, an appropriate flash message will be created (a flash `alert` for an error, and a flash `notice` for a successful transaction). The ReasonCodeChecker's `run` method returns a user friendly explanation of the status of the transaction.
 
@@ -139,19 +139,26 @@ If you prefer to not have exceptions thrown for error conditions, you can call `
 
 ### Optional: Securely submitting the transaction amount to your credit card form
 
-Cybersourcery provides an optional feature to simplify securely populating the `amount` field in the credit card payment form. In the demo project, the controller method for displaying the credit card form accepts a POST. It receives data from an extremely simple "shopping cart" form. Cybersourcery signs and verifies the submission from the cart page to the credit card form page in the same manner as the credit card form submission to Cybersource. The reason for this is the `amount` field should be a signed field in the Cybersource transaction, and in a typical use case, the `amount` value will be determined before the user arrives at the credit card form. So we need a way to securely pass the `amount` to the credit card form. The typical solution for this is to not pass the amount through the front-end, but with Cybersource, this can complicate the process of making sure the `amount` field is included in the signed fields (so we'll know it has not been tampered with) . Cybersourcery's signing solution provides a secure way to handle the `amount` through the front-end. Note you can also include `merchant_defined_data` fields, and any other fields you might want, for signing.
+Cybersourcery provides an optional feature to simplify securely populating the `amount` field in the credit card payment form. In the demo project, the controller method for displaying the credit card form accepts a POST. It receives data from an extremely simple "shopping cart" form. Cybersourcery signs and verifies the submission from the cart page to the credit card form page in the same manner as the credit card form submission to Cybersource. The reason for this is the `amount` field should be a signed field in the Cybersource transaction, as it is a likely target for tampering. In a typical use case, the `amount` value will be determined before the user arrives at the credit card form. So we need a way to securely pass the `amount` to the credit card form. The typical solution for this is to not pass the amount through the front-end, but with Cybersource, this can complicate the process of making sure the `amount` field is included in the signed fields. Cybersourcery's signing solution provides a secure way to handle the `amount` through the front-end. Note you can also include `merchant_defined_data` fields, and any other fields you might want, for signing.
 
 Here is an example, for creating `@signed_fields` to include in a simple shopping cart form that will submit to the credit card payment form:
 
-  ```ruby
-  def new
-    cart_fields = { amount: 100, merchant_defined_data1: 'foo' }
-    cart_signer = Cybersourcery::Container.get_cart_signer('pwksgem', session, cart_fields)
-    @signed_fields = cart_signer.run
-  end
-  ```  
+```ruby
+def new
+  cart_fields = { amount: 100, merchant_defined_data1: 'foo' }
+  cart_signer = Cybersourcery::Container.get_cart_signer('pwksgem', session, cart_fields)
+  @signed_fields = cart_signer.run
+end
+```  
 
-If the credit card transaction fails, and you send your user back to the credit card form, Cybersourcery makes it easy to re-create the state of the cart form submission that precedes the display of the credit card form. See the `setup_payment_form` method in [the demo project's PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb).
+The controller method for displaying your credit card form can receive the POST and check the cart's signature, like this:
+
+```ruby
+signature_checker = Cybersourcery::Container.get_cart_signature_checker('pwksgem', params, session)
+signature_checker.run!
+```
+
+See the `setup_payment_form` method in [the demo project's PaymentsController](https://github.com/promptworks/cybersourcery_demo_site/blob/master/app/controllers/payments_controller.rb) for a complete example. Note that if the credit card transaction fails, and you want to send the user back to the credit card form, Cybersourcery makes it easy to re-create the state of the cart form submission that precedes the display of the credit card form. The `setup_payment_form` method in the demo project illustrates this also.
 
 ### Optional: Serializing merchant defined data
 
