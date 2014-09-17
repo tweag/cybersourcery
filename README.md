@@ -45,14 +45,13 @@ If you download the gem with its development dependencies, you will get a workin
     * secret_key: the secret key for the profile
     * success_url: this is an optional field - if you provide it, you can redirect users to it after a successful transaction (it can be an absolute or relative URL)
     * transaction_type: a Cybersource transaction type, for example: `sale,create_payment_token`. See [the list of supported transaction types](http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_SOP/html/wwhelp/wwhimpl/js/html/wwhelp.htm#href=creating_profile.05.7.html#1485663).
-    * endpoint_type: indicates the URL endpoint appropriate for the transaction - supported values are:
+    * endpoint_type: indicates [the Cybersource URL endpoint](http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_SOP/html/wwhelp/wwhimpl/js/html/wwhelp.htm#href=creating_profile.05.7.html#1485663) appropriate for the transaction - supported values are:
       * `standard`
       * `create_payment_token`
       * `update_payment_token`
       * `iframe_standard`
       * `iframe_create_payment_token`
       * `iframe_update_payment_token`
-      These correspond to [the supported Cybersource endpoint types](http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_SOP/html/wwhelp/wwhimpl/js/html/wwhelp.htm#href=creating_profile.05.7.html#1485663)
     * payment_method: `card` or `echeck`
     * locale: any locale supported by Cybersource, for example, `en-us`
     * currency: any currency supported by Cybersource, for example, `USD`
