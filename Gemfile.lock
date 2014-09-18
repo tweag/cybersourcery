@@ -1,22 +1,22 @@
-PATH
-  remote: .
+GIT
+  remote: https://efcb6ec0daca0c95d920a44d9789ab56b3a6946c:x-oauth-basic@github.com/promptworks/cybersourcery_testing.git
+  revision: e69d83f988fea6121b587c8bd8bf1527f61c4951
   specs:
-    cybersourcery (0.0.5)
-      rails (>= 3.1)
-      ruby-hmac (~> 0.4.0)
-
-PATH
-  remote: ../cybersourcery_testing
-  specs:
-    cybersourcery_testing (0.0.1)
+    cybersourcery_testing (0.0.2)
       dotenv
       nokogiri
       rack-translating_proxy
       rakeup
-      shotgun
       sinatra
       vcr
       webmock
+
+PATH
+  remote: .
+  specs:
+    cybersourcery (0.0.6)
+      rails (>= 3.1)
+      ruby-hmac (~> 0.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -98,7 +98,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack-translating_proxy (0.1.0)
+    rack-translating_proxy (0.1.1)
       rack-proxy (~> 0.5)
     rails (4.0.9)
       actionmailer (= 4.0.9)
@@ -147,8 +147,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
-    shotgun (0.9)
-      rack (>= 1.0)
     simple_form (3.1.0.rc2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)

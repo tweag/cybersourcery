@@ -16,5 +16,5 @@ gemspec
 # TODO: remove this from here and add it to the gemspec as a development dependency,
 # once the testing gem is released
 group :test, :development do
-  gem 'cybersourcery_testing', path: '/Users/toppa/Projects/cybersourcery_testing'
+  gem 'cybersourcery_testing', git: 'https://efcb6ec0daca0c95d920a44d9789ab56b3a6946c:x-oauth-basic@github.com/promptworks/cybersourcery_testing.git'
 end
