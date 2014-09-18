@@ -1,3 +1,4 @@
+require 'sinatra' # this needs to be here too
 require 'cybersourcery_testing/cybersource_proxy'
 
 VCR.configure do |c|
