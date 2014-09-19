@@ -130,7 +130,7 @@ Key points:
     There are three possible outcomes when handling the response from Cybersource:
     
     <ol type="A">
-    <li>A successful transaction: the ReasonCodeChecker's `run!` method returns a user friendly message that the transaction succeeded.</li>
+    <li>A successful transaction: the ReasonCodeChecker's <code>run!</code> method returns a user friendly message that the transaction succeeded.</li>
     <li>An exception is raised, if the signature returned from Cybersource does not match: this indicates data tampering.</li>
     <li>An exception is raised, if the transaction failed: this can happen due to an expired credit card, or some other reason.</li>
     </ol>
