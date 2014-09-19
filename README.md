@@ -98,44 +98,44 @@ Key points:
 
 1. Add the following to your controller:
 
-  ```ruby
-  skip_before_filter :verify_authenticity_token, only: :confirm
-  before_action :normalize_cybersource_params, only: :confirm
-
-  [...]
-
-  private
-
-  def normalize_cybersource_params
-    Cybersourcery::CybersourceParamsNormalizer.run(params)
-  end
-  ```
-
-  Since the POST is from Cybersource, there is no reason to check for a Rails authenticity token.
+    ```ruby
+    skip_before_filter :verify_authenticity_token, only: :confirm
+    before_action :normalize_cybersource_params, only: :confirm
   
-  The `CybersourceParamsNormalizer` copies and adds param names that start with "req_", and removes "req_" from them, so they have consistent naming across contexts, which simplifies internal handling.
+    [...]
+  
+    private
+  
+    def normalize_cybersource_params
+      Cybersourcery::CybersourceParamsNormalizer.run(params)
+    end
+    ```
+  
+    Since the POST is from Cybersource, there is no reason to check for a Rails authenticity token.
+    
+    The `CybersourceParamsNormalizer` copies and adds param names that start with "req_", and removes "req_" from them, so they have consistent naming across contexts, which simplifies internal handling.
   
 2. A minimal method for handling the response would look like this:
 
-  ```ruby
-  def confirm
-    signature_checker = Cybersourcery::Container.get_cybersource_signature_checker('pwksgem', params)
-    signature_checker.run!
-    flash.now[:notice] = Cybersourcery::ReasonCodeChecker::run!(params[:reason_code])
-  rescue Cybersourcery::CybersourceryError => e
-    flash.now[:alert] = e.message
-  end
-  ```
-
-  There are three possible outcomes when handling the response from Cybersource:
+    ```ruby
+    def confirm
+      signature_checker = Cybersourcery::Container.get_cybersource_signature_checker('pwksgem', params)
+      signature_checker.run!
+      flash.now[:notice] = Cybersourcery::ReasonCodeChecker::run!(params[:reason_code])
+    rescue Cybersourcery::CybersourceryError => e
+      flash.now[:alert] = e.message
+    end
+    ```
   
-  * A successful transaction: the ReasonCodeChecker's `run!` method returns a user friendly message that the transaction succeeded.
-  * An exception is raised, if the signature returned from Cybersource does not match: this indicates data tampering.
-  * An exception is raised, if the transaction failed: this can happen due to an expired credit card, or some other reason.
-  
-  The `rescue` block will catch either exception, with a user friendly message from the ReasonCodeChecker.
-  
-  If you prefer to not have exceptions thrown, you can call `run` (without the exclamation point) on the SignatureChecker or the ReasonCodeChecker.
+    There are three possible outcomes when handling the response from Cybersource:
+    
+    * A successful transaction: the ReasonCodeChecker's `run!` method returns a user friendly message that the transaction succeeded.
+    * An exception is raised, if the signature returned from Cybersource does not match: this indicates data tampering.
+    * An exception is raised, if the transaction failed: this can happen due to an expired credit card, or some other reason.
+    
+    The `rescue` block will catch either exception, with a user friendly message from the ReasonCodeChecker.
+    
+    If you prefer to not have exceptions thrown, you can call `run` (without the exclamation point) on the SignatureChecker or the ReasonCodeChecker.
 
 3. Typically, you will want to display the credit card form again if there is a problem with the transaction, so the user can try again. See the [PaymentsController's `confirm` method in the demo project](https://github.com/promptworks/cybersourcery/blob/master/spec/demo/app/controllers/payments_controller.rb) for an example of how to do this.
 
