@@ -25,6 +25,9 @@ If you download the gem with its development dependencies, you will get a workin
 
   ```ruby
   gem 'cybersourcery'
+  ```
+  
+  ```console
   bundle
   ```
 
@@ -55,7 +58,7 @@ If you download the gem with its development dependencies, you will get a workin
     * payment_method: `card` or `echeck`
     * locale: any locale supported by Cybersource, for example, `en-us`
     * currency: any currency supported by Cybersource, for example, `USD`
-    * unsigned_field_names: a comma separated list of the fields that will not be signed in the transaction - this typically includes all the fields in the credit card payment form
+    * unsigned_field_names: a comma separated list of the fields that will not be signed in the transaction - this typically includes all the visible fields in the credit card payment form
 
 ## Usage
 
@@ -85,7 +88,7 @@ Cybersourcery imposes no specific approach to how you create your form, but prov
 Key points:
 
 * The form `action` URL is determined based on the information provided in `cybersourcery_profiles.yml`.
-* Calling the `add_signed_fields` helper method is crucial, for passing the signature and signed fields to Cybersource.
+* Calling the `add_signed_fields` helper method is crucial, for passing the signature and signed fields to Cybersource as hidden inputs.
 * Cybersourcery provides support for HTML5 front-end validation, but no specific approach to front-end form validation is required. As mentioned above, you can subclass the non-persisted Payment model to add your own fields and indicate which are required.
 * The optional call to the `add_expiry_date_fields` helper method makes it easy to include a month and date picker in your form that's [appropriate for indicating credit card expiry dates](http://baymard.com/blog/how-to-format-expiration-date-fields). Used in conjunction with [this javascript from the demo project](https://github.com/promptworks/cybersourcery/blob/master/spec/demo/app/assets/javascripts/payments.js.coffee), it will then submit a date in the user-unfriendly format that Cybersource requires.
 * The javascript file in the demo project also provides dynamic switching of the input type for the "State" field, based on whether the US is selected as the country (it provides a select list of states for the US, or a text input field for other countries).
@@ -124,9 +127,15 @@ Key points:
   end
   ```
 
-There are two possible exceptions that can be thrown here, and the `rescue` block will catch either of them. One possibility is that the signatures fail to match, which indicates data tampering. The other possibility is that the transaction failed, due to an expired credit card, or some other reason. In either case, an appropriate flash message will be created (a flash `alert` for an error, and a flash `notice` for a successful transaction). The ReasonCodeChecker's `run` method returns a user friendly explanation of the status of the transaction.
-
-If you prefer to not have exceptions thrown for error conditions, you can call `run` (without the exclamation point) on the SignatureChecker or the ReasonCodeChecker.
+  There are three possible outcomes when handling the response from Cybersource:
+  
+  * A successful transaction: the ReasonCodeChecker's `run!` method returns a user friendly message that the transaction succeeded.
+  * An exception is raised, if the signature returned from Cybersource does not match: this indicates data tampering.
+  * An exception is raised, if the transaction failed: this can happen due to an expired credit card, or some other reason.
+  
+  The `rescue` block will catch either exception, with a user friendly message from the ReasonCodeChecker.
+  
+  If you prefer to not have exceptions thrown, you can call `run` (without the exclamation point) on the SignatureChecker or the ReasonCodeChecker.
 
 3. Typically, you will want to display the credit card form again if there is a problem with the transaction, so the user can try again. See the [PaymentsController's `confirm` method in the demo project](https://github.com/promptworks/cybersourcery/blob/master/spec/demo/app/controllers/payments_controller.rb) for an example of how to do this.
 
