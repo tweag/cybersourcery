@@ -62,14 +62,14 @@ If you download the gem with its development dependencies, you will get a workin
 
 ## Tests
 
-If you have installed Cybersourcery with its development dependencies, you will also get the Cybersourcery Testing gem, which will allow you to run all the tests:
+If you have installed Cybersourcery with its development dependencies, you will also get the Cybersourcery Testing gem, which will allow you to run all the tests. First, start the Cybersource proxy server:
   
 ```console
 cd spec/demo
 rake cybersourcery:proxy
 ```
 
-Then from the project root:
+Then from the project root, run the tests:
 
 ```console
 rspec spec
