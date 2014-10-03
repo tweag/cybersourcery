@@ -60,6 +60,21 @@ If you download the gem with its development dependencies, you will get a workin
     * currency: any currency supported by Cybersource, for example, `USD`
     * unsigned_field_names: a comma separated list of the fields that will not be signed in the transaction - this typically includes all the visible fields in the credit card payment form
 
+## Tests
+
+If you have installed Cybersourcery with its development dependencies, you will also get the Cybersourcery Testing gem, which will allow you to run all the tests:
+  
+```console
+cd spec/demo
+rake cybersourcery:proxy
+```
+
+Then from the project root:
+
+```console
+rspec spec
+```
+
 ## Usage
 
 ### Setting up your credit card payment form
