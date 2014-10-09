@@ -42,7 +42,7 @@ module Cybersourcery
 
     def signed_fields
       form_fields.tap do |data|
-        signature_keys = data[:signed_field_names].split(',').map { |e| e.to_sym}
+        signature_keys = data[:signed_field_names].split(',').map(&:to_sym)
         signature_message = self.class.signature_message(data, signature_keys)
         data[:signature]  = signer.signature(signature_message, profile.secret_key)
       end
@@ -50,13 +50,13 @@ module Cybersourcery
 
     def form_fields
       @form_fields ||= signable_fields.dup.merge(
-        unsigned_field_names: @profile.unsigned_field_names.map { |e| e.to_s }.join(','),
+        unsigned_field_names: @profile.unsigned_field_names.join(','),
         transaction_uuid:     SecureRandom.hex(16),
-        reference_number:     SecureRandom.hex(16)
+        reference_number:     SecureRandom.hex(16),
+        signed_date_time:     time,
+        signed_field_names:   nil # make sure it's in data.keys
       ).tap do |data|
-        data[:signed_field_names] =
-          (data.keys + %w(signed_field_names signed_date_time)).join(',')
-        data[:signed_date_time] = time
+        data[:signed_field_names] = data.keys.join(',')
       end
     end
 

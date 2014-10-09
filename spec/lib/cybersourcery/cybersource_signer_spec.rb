@@ -73,7 +73,7 @@ describe Cybersourcery::CybersourceSigner do
         unsigned_field_names: 'bill_to_email,bill_to_forename,bill_to_surname,bill_to_address_line1,bill_to_address_line2,bill_to_address_country,bill_to_address_state,bill_to_address_postal_code,bill_to_address_city,card_cvn,card_expiry_date,card_number,card_type',
         transaction_uuid: form_fields[:transaction_uuid],
         reference_number: form_fields[:reference_number],
-        signed_field_names: 'access_key,profile_id,payment_method,locale,transaction_type,currency,unsigned_field_names,transaction_uuid,reference_number,signed_field_names,signed_date_time',
+        signed_field_names: 'access_key,profile_id,payment_method,locale,transaction_type,currency,unsigned_field_names,transaction_uuid,reference_number,signed_date_time,signed_field_names',
         signed_date_time: time
       )
     end
