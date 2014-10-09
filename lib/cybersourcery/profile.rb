@@ -31,7 +31,6 @@ module Cybersourcery
 
       @profile_id = profile_id
       @endpoint_type = @endpoint_type.to_sym
-      @unsigned_field_names = @unsigned_field_names.split(',').map(&:strip)
 
       unless self.valid?
         raise Cybersourcery::CybersourceryError, self.errors.full_messages.to_sentence
