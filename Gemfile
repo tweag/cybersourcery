@@ -13,8 +13,3 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
-# TODO: remove this from here and add it to the gemspec as a development dependency,
-# once the testing gem is released
-group :test, :development do
-  gem 'cybersourcery_testing', git: 'https://github.com/promptworks/cybersourcery_testing.git'
-end
