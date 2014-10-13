@@ -2,12 +2,13 @@ require 'rails_helper'
 
 feature 'Payments' do
   context 'Form does not pass client side validation' do
-    scenario 'Fails to submit the payment form when the fields are not filled in', js: true do
+    scenario 'Transaction fails when the fields are not filled in', js: true do
       visit new_cart_path
       click_button 'commit' # submit the cart form
       click_button 'commit' # submit the payment form
 
-      # this is relying on HTML5 validations, which Capybara cannot detect, so check the page header
+      # this is relying on HTML5 validations, which Capybara cannot detect,
+      # so check the page header
       expect(page).to have_content 'New payment'
     end
   end
@@ -29,7 +30,7 @@ feature 'Payments' do
       fill_in 'bill_to_address_postal_code', with: '19083'
     end
 
-    scenario 'Successfully completes a transaction with a valid credit card', js: true do
+    scenario 'Transaction successful with a valid credit card', js: true do
       fill_in 'card_number', with: '4111111111111111'
       select 'Visa', from: 'card_type'
       click_button 'Submit'
@@ -37,15 +38,17 @@ feature 'Payments' do
       expect(page).to have_content 'Successful transaction'
     end
 
-    scenario 'Fails to complete a transaction with an invalid credit card number', js: true do
+    scenario 'Transaction fails with an invalid credit card number', js: true do
       fill_in 'card_number', with: '4111111111111112'
       select 'Visa', from: 'card_type'
       click_button 'Submit'
 
-      expect(page).to have_content 'Declined: One or more fields in the request contains invalid data'
+      expect(page).to have_content(
+        'Declined: One or more fields in the request contains invalid data'
+      )
     end
 
-    scenario 'Fails to complete a transaction with an invalid credit card type', js: true do
+    scenario 'Transaction fails with an invalid credit card type', js: true do
       fill_in 'card_number', with: '4111111111111111'
       select 'American Express', from: 'card_type'
       click_button 'Submit'
