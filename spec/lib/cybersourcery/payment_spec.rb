@@ -1,20 +1,23 @@
 require 'rails_helper'
 
 describe Cybersourcery::Payment do
-  let(:transaction_url) { 'https://testsecureacceptance.cybersource.com/silent/pay' }
+  let(:transaction_url) do
+    'https://testsecureacceptance.cybersource.com/silent/pay'
+  end
+
   let(:profile) { double :profile, transaction_url: transaction_url }
   let(:cybersource_signer) do
     double(
       :cybersource_signer,
       add_and_sign_fields: {
         payment_method: 'card',
-        locale: 'en',
-        signature: 'SUPER_SECURE_SIGNATURE'
+        locale:         'en',
+        signature:      'SUPER_SECURE_SIGNATURE'
       }
     )
   end
 
-  subject(:payment) { Cybersourcery::Payment.new(cybersource_signer, profile, {}) }
+  subject(:payment) { described_class.new(cybersource_signer, profile, {}) }
 
   # doing minimal testing of validation here, as feature specs cover this
   describe '#initialize' do

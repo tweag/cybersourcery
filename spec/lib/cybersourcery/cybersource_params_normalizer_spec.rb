@@ -10,16 +10,16 @@ describe Cybersourcery::CybersourceParamsNormalizer do
         'auth_response' => '100'
       }
 
-      Cybersourcery::CybersourceParamsNormalizer.run(params)
+      described_class.run(params)
 
-      expect(params).to eq ({
+      expect(params).to eq(
         'req_card_expiry_date' => '06-2015',
         'req_bill_to_address_state' => 'PA',
         'card_expiry_date' => '06-2015',
         'bill_to_address_state' => 'PA',
         'transaction_id' => '4095759873410176195663',
         'auth_response' => '100'
-      })
+      )
     end
   end
 end
