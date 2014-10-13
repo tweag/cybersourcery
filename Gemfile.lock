@@ -1,22 +1,9 @@
-GIT
-  remote: https://efcb6ec0daca0c95d920a44d9789ab56b3a6946c:x-oauth-basic@github.com/promptworks/cybersourcery_testing.git
-  revision: e69d83f988fea6121b587c8bd8bf1527f61c4951
-  specs:
-    cybersourcery_testing (0.0.2)
-      dotenv
-      nokogiri
-      rack-translating_proxy
-      rakeup
-      sinatra
-      vcr
-      webmock
-
 PATH
   remote: .
   specs:
-    cybersourcery (0.0.6)
+    cybersourcery (0.0.7)
       rails (>= 3.1)
-      ruby-hmac (~> 0.4.0)
+      ruby-hmac (>= 0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -66,6 +53,14 @@ GEM
     coffee-script-source (1.7.1)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
+    cybersourcery_testing (0.0.2)
+      dotenv (~> 0.11)
+      nokogiri (~> 1.6)
+      rack-translating_proxy (~> 0.1.1)
+      rakeup (~> 1.2)
+      sinatra (~> 1.4)
+      vcr (~> 2.9)
+      webmock (~> 1.19)
     diff-lcs (1.2.5)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
@@ -97,7 +92,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
-    rack-proxy (0.5.15)
+    rack-proxy (0.5.16)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -137,7 +132,7 @@ GEM
       rspec-support (~> 3.0.0)
     rspec-support (3.0.3)
     ruby-hmac (0.4.0)
-    safe_yaml (1.0.3)
+    safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -178,7 +173,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.41)
     vcr (2.9.3)
-    webmock (1.18.0)
+    webmock (1.19.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
     websocket-driver (0.3.4)
@@ -189,18 +184,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (~> 3.2.0.1)
-  bundler (~> 1.6)
-  capybara (~> 2.4.1)
-  coffee-rails (~> 4.0.0)
+  bootstrap-sass (>= 3.2.0.1)
+  bundler (>= 1.6)
+  capybara (>= 2.4)
+  coffee-rails (>= 4.0)
   cybersourcery!
-  cybersourcery_testing!
-  dotenv-rails
-  jquery-rails
-  poltergeist
-  rake
-  rspec-rails (~> 3.0.0)
-  sass-rails (~> 4.0.2)
-  simple_form (~> 3.1.0.rc2)
-  slim-rails (~> 2.1.5)
-  sqlite3
+  cybersourcery_testing (>= 0.0.2)
+  dotenv-rails (>= 0.11)
+  jquery-rails (>= 3.1)
+  poltergeist (>= 1.5)
+  rake (>= 10.3)
+  rspec-rails (>= 3.0)
+  sass-rails (>= 4.0)
+  simple_form (>= 3.1.0.rc2)
+  slim-rails (>= 2.1.5)
+  sqlite3 (>= 1.3)
