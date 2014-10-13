@@ -1,6 +1,6 @@
 # Cybersourcery
 
-[![GitHub version](https://badge.fury.io/gh/Cybersourcery.svg)](http://badge.fury.io/gh/Cybersourcery)
+[![Gem Version](https://badge.fury.io/rb/cybersourcery.svg)](http://badge.fury.io/rb/cybersourcery)
 
 A pain removal gem for working with Cybersource Secure Acceptance Silent Order POST.
 
