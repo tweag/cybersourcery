@@ -72,7 +72,7 @@ rake cybersourcery:proxy
 Then from the project root, run the tests:
 
 ```console
-rspec spec
+rake
 ```
 
 ## Usage
