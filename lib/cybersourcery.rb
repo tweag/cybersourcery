@@ -15,16 +15,6 @@ if defined? Rails
   require 'cybersourcery/reason_code_checker'
   require 'cybersourcery/container'
   require 'cybersourcery/cybersource_params_normalizer'
-
-  if Rails.env.test?
-    require 'slim-rails'
-    require 'bootstrap-sass'
-    require 'simple_form'
-    require 'sass-rails'
-    require 'coffee-rails'
-    require 'jquery-rails'
-    require 'dotenv-rails'
-  end
 end
 
 module Cybersourcery

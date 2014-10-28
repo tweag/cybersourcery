@@ -7,6 +7,14 @@ require "action_mailer/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+require 'slim-rails'
+require 'bootstrap-sass'
+require 'simple_form'
+require 'sass-rails'
+require 'coffee-rails'
+require 'jquery-rails'
+require 'dotenv-rails'
+
 Bundler.require(*Rails.groups)
 
 # For a typical rails app this line is not needed.
