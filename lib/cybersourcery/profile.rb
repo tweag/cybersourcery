@@ -61,7 +61,7 @@ module Cybersourcery
     attr_accessor :profile_id, :name, :service, :access_key, :secret_key, :success_url,
                   :transaction_type, :endpoint_type, :payment_method, :locale, :currency,
                   :unsigned_field_names
-    validates_presence_of :profile_id, :name, :service, :access_key, :secret_key
+    validates_presence_of :profile_id, :service, :access_key, :secret_key
     validates_inclusion_of :service, in: %w(test live), allow_nil: false
     validates_inclusion_of :endpoint_type, in: VALID_ENDPOINTS.keys, allow_nil: false
     validates_inclusion_of :payment_method, in: %w(card echeck), allow_nil: false
