@@ -68,15 +68,14 @@ module Cybersourcery
     validates_inclusion_of :locale, in: LOCALES.keys
     validates_format_of :currency, with: /\A[A-Z]{3}\Z/, allow_nil: false
 
-    def initialize(profile_id, profiles = Cybersourcery.configuration.profiles)
-      profiles[profile_id].each do |k,v|
-        self.send "#{k}=", v
+    def initialize(attributes = {})
+      attributes.each do |k,v|
+        send "#{k}=", v
       end
 
-      @profile_id = profile_id
       @endpoint_type = @endpoint_type.to_sym
 
-      unless self.valid?
+      unless valid?
         raise Cybersourcery::CybersourceryError, self.errors.full_messages.to_sentence
       end
     end

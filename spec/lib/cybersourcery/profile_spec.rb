@@ -19,27 +19,26 @@ describe Cybersourcery::Profile do
     )
   end
 
-  let(:profiles) do
-    { 'pwksgem' =>
-      {
-        'name' => 'PromptWorks Gem',
-        'service' => 'test',
-        'access_key' => '839d4d3b1cef3e04bd2981997714803b',
-        'secret_key' => 'really-long-secret-key',
-        'success_url' => 'http://tranquil-ocean-5865.herokuapp.com/responses',
-        'transaction_type' => 'sale',
-        'endpoint_type' => 'standard',
-        'payment_method' => 'card',
-        'locale' => 'en-us',
-        'currency' => 'USD',
-        'unsigned_field_names' => unsigned_field_names
-      }
-    }
+  def build_profile(attrs = {})
+    described_class.new({
+      profile_id:           'pwksgem',
+      name:                 'PromptWorks Gem',
+      service:              'test',
+      access_key:           '839d4d3b1cef3e04bd2981997714803b',
+      secret_key:           'really-long-secret-key',
+      success_url:          'http://example.com/responses',
+      transaction_type:     'sale',
+      endpoint_type:        'standard',
+      payment_method:       'card',
+      locale:               'en-us',
+      currency:             'USD',
+      unsigned_field_names: unsigned_field_names
+    }.merge(attrs))
   end
 
-  describe '#initialize' do
+  describe '.get' do
     it 'sets the attributes when they are valid' do
-      profile = described_class.new('pwksgem', profiles)
+      profile = build_profile
       expect(profile.profile_id).to eq 'pwksgem'
       expect(profile.name).to eq 'PromptWorks Gem'
       expect(profile.service).to eq 'test'
@@ -53,61 +52,46 @@ describe Cybersourcery::Profile do
       expect(profile.unsigned_field_names).to eq unsigned_field_names
       expect(
         profile.success_url
-      ).to eq 'http://tranquil-ocean-5865.herokuapp.com/responses'
+      ).to eq 'http://example.com/responses'
     end
 
     it 'raises an exception if the "service" value is not "live" or "test"' do
-      profiles['pwksgem']['service'] = 'foo'
-
-      expect do
-        described_class.new('pwksgem', profiles)
-      end.to raise_exception(Cybersourcery::CybersourceryError)
+      expect { build_profile(service: 'foo') }
+        .to raise_exception Cybersourcery::CybersourceryError
     end
 
     it 'raises an exception if the "endpoint_type" is not valid' do
-      profiles['pwksgem']['endpoint_type'] = 'foo'
-
-      expect do
-        described_class.new('pwksgem', profiles)
-      end.to raise_exception(Cybersourcery::CybersourceryError)
+      expect { build_profile(endpoint_type: 'foo') }
+        .to raise_exception(Cybersourcery::CybersourceryError)
     end
 
     it 'raises an exception if any setting is missing' do
-      profiles['pwksgem']['access_key'] = nil
-
-      expect do
-        described_class.new('pwksgem', profiles)
-      end.to raise_exception(Cybersourcery::CybersourceryError)
+      expect { build_profile(access_key: nil) }
+        .to raise_exception(Cybersourcery::CybersourceryError)
     end
   end
 
   describe '#local' do
     context 'when it is one of Profile::LOCALES' do
       it 'must be one of Profile::LOCALES' do
-        profiles['pwksgem']['locale'] =
-          Cybersourcery::Profile::LOCALES.keys.shuffle.first
-
-        expect do
-          Cybersourcery::Profile.new('pwksgem', profiles)
-        end.not_to raise_exception
+        profile = build_profile(
+          locale: described_class::LOCALES.keys.shuffle.first
+        )
+        expect(profile).to be_valid
       end
     end
 
     context 'when it is not one of Profile::LOCALES' do
       it 'must not be one of Profile::LOCALES' do
-        profiles['pwksgem']['locale'] = 'ab-cd'
-        expect do
-          Cybersourcery::Profile.new('pwksgem', profiles)
-        end.to raise_exception(Cybersourcery::CybersourceryError)
+        expect { build_profile(locale: 'ab-cd') }
+          .to raise_exception(Cybersourcery::CybersourceryError)
       end
     end
 
     context 'when it is nil' do
       it 'must not be one of Profile::LOCALES' do
-        profiles['pwksgem']['locale'] = nil
-        expect do
-          Cybersourcery::Profile.new('pwksgem', profiles)
-        end.to raise_exception(Cybersourcery::CybersourceryError)
+        expect { build_profile(locale: nil) }
+          .to raise_exception(Cybersourcery::CybersourceryError)
       end
     end
   end
@@ -117,23 +101,20 @@ describe Cybersourcery::Profile do
   # only.
   describe '#transaction_url' do
     it 'returns the proxy URL, if in test env and proxy URL is defined' do
-      profile = described_class.new('pwksgem', profiles)
+      profile = build_profile
       transaction_url = profile.transaction_url('http://localhost:5556')
       expect(transaction_url).to eq 'http://localhost:5556/silent/pay'
     end
 
     it 'returns "test" service URL, if in test env and proxy URL not defined' do
-      profiles['pwksgem']['service'] = 'test'
-      profile = described_class.new('pwksgem', profiles)
+      profile = build_profile(service: 'test')
       transaction_url = profile.transaction_url(nil)
-      expect(
-        transaction_url
-      ).to eq 'https://testsecureacceptance.cybersource.com/silent/pay'
+      expect(transaction_url).to eq \
+        'https://testsecureacceptance.cybersource.com/silent/pay'
     end
 
     it 'returns "test" service URL, if not in test env and using test server' do
-      profiles['pwksgem']['service'] = 'test'
-      profile = described_class.new('pwksgem', profiles)
+      profile = build_profile(service: 'test')
       transaction_url = profile.transaction_url(nil, 'development')
       expect(
         transaction_url
@@ -141,8 +122,7 @@ describe Cybersourcery::Profile do
     end
 
     it 'returns "live" service URL, if not in test env and using live server' do
-      profiles['pwksgem']['service'] = 'live'
-      profile = described_class.new('pwksgem', profiles)
+      profile = build_profile(service: 'live')
       transaction_url = profile.transaction_url(nil, 'development')
       expect(
         transaction_url
