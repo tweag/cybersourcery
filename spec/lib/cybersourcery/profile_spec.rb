@@ -81,6 +81,37 @@ describe Cybersourcery::Profile do
     end
   end
 
+  describe '#local' do
+    context 'when it is one of Profile::LOCALES' do
+      it 'must be one of Profile::LOCALES' do
+        profiles['pwksgem']['locale'] =
+          Cybersourcery::Profile::LOCALES.keys.shuffle.first
+
+        expect do
+          Cybersourcery::Profile.new('pwksgem', profiles)
+        end.not_to raise_exception
+      end
+    end
+
+    context 'when it is not one of Profile::LOCALES' do
+      it 'must not be one of Profile::LOCALES' do
+        profiles['pwksgem']['locale'] = 'ab-cd'
+        expect do
+          Cybersourcery::Profile.new('pwksgem', profiles)
+        end.to raise_exception(Cybersourcery::CybersourceryError)
+      end
+    end
+
+    context 'when it is nil' do
+      it 'must not be one of Profile::LOCALES' do
+        profiles['pwksgem']['locale'] = nil
+        expect do
+          Cybersourcery::Profile.new('pwksgem', profiles)
+        end.to raise_exception(Cybersourcery::CybersourceryError)
+      end
+    end
+  end
+
   # The arguments to transaction_url are normally not needed, as they are
   # determined from the environment. The arguments are to facilitate testing
   # only.

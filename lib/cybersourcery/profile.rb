@@ -14,6 +14,50 @@ module Cybersourcery
       iframe_update_payment_token: '/silent/embedded/token/update'
     }
 
+    LOCALES = {
+      'ar-xn' => 'Arabic',
+      'km-kh' => 'Cambodia',
+      'zh-hk' => 'Chinese - Hong Kong',
+      'zh-mo' => 'Chinese - Maco',
+      'zh-cn' => 'Chinese - Mainland',
+      'zh-sg' => 'Chinese - Singapore',
+      'zh-tw' => 'Chinese - Taiwan',
+      'cz-cz' => 'Czech',
+      'nl-nl' => 'Dutch',
+      'en-us' => 'English - American',
+      'en-au' => 'English - Australia',
+      'en-gb' => 'English - Britain',
+      'en-ca' => 'English - Canada',
+      'en-ie' => 'English - Ireland',
+      'en-nz' => 'English - New Zealand',
+      'fr-ca' => 'French - Canada',
+      'fr-fr' => 'French',
+      'de-at' => 'German - Austria',
+      'de-de' => 'German',
+      'hu-hu' => 'Hungary',
+      'id-id' => 'Indonesian',
+      'it-it' => 'Italian',
+      'ja-jp' => 'Japanese',
+      'ko-kr' => 'Korean',
+      'lo-la' => 'Lao People’s Democratic Republic',
+      'ms-my' => 'Malaysian Bahasa',
+      'tl-ph' => 'Philippines Tagalog',
+      'pl-pl' => 'Polish',
+      'pt-br' => 'Portuguese - Brazil',
+      'ru-ru' => 'Russian',
+      'sk-sk' => 'Slovakian',
+      'es-us' => 'Spanish - American',
+      'es-ar' => 'Spanish - Argentina',
+      'es-cl' => 'Spanish - Chile',
+      'es-co' => 'Spanish - Colombia',
+      'es-mx' => 'Spanish - Mexico',
+      'es-pe' => 'Spanish - Peru',
+      'es-es' => 'Spanish',
+      'th-th' => 'Thai',
+      'tr-tr' => 'Turkish',
+      'vi-vn' => 'Vietnamese',
+    }
+
     attr_accessor :profile_id, :name, :service, :access_key, :secret_key, :success_url,
                   :transaction_type, :endpoint_type, :payment_method, :locale, :currency,
                   :unsigned_field_names
@@ -21,7 +65,7 @@ module Cybersourcery
     validates_inclusion_of :service, in: %w(test live), allow_nil: false
     validates_inclusion_of :endpoint_type, in: VALID_ENDPOINTS.keys, allow_nil: false
     validates_inclusion_of :payment_method, in: %w(card echeck), allow_nil: false
-    validates_format_of :locale, with: /\A[a-z]{2}-[a-z]{2}\Z/, allow_nil: false
+    validates_inclusion_of :locale, in: LOCALES.keys
     validates_format_of :currency, with: /\A[A-Z]{3}\Z/, allow_nil: false
 
     def initialize(profile_id, profiles = Cybersourcery.configuration.profiles)
