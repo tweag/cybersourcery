@@ -20,23 +20,20 @@ describe Cybersourcery::CybersourceSigner do
   end
 
   let(:profile) do
-    cybersource_profiles = {
-      'pwksgem' =>
-        {
-          'name' => 'PromptWorks Gem',
-          'service' => 'test',
-          'access_key' => '839d4d3b1cef3e04bd2981997714803b',
-          'secret_key' => 'really-long-secret-key',
-          'success_url' => 'http://tranquil-ocean-5865.herokuapp.com/responses',
-          'transaction_type' => 'sale',
-          'endpoint_type' => 'standard',
-          'payment_method' => 'card',
-          'locale' => 'en-us',
-          'currency' => 'USD',
-          'unsigned_field_names' => unsigned_field_names
-        }
-    }
-    Cybersourcery::Profile.new('pwksgem', cybersource_profiles)
+    Cybersourcery::Profile.new(
+      'profile_id' => 'pwksgem',
+      'name' => 'PromptWorks Gem',
+      'service' => 'test',
+      'access_key' => '839d4d3b1cef3e04bd2981997714803b',
+      'secret_key' => 'really-long-secret-key',
+      'success_url' => 'http://tranquil-ocean-5865.herokuapp.com/responses',
+      'transaction_type' => 'sale',
+      'endpoint_type' => 'standard',
+      'payment_method' => 'card',
+      'locale' => 'en-us',
+      'currency' => 'USD',
+      'unsigned_field_names' => unsigned_field_names
+    )
   end
 
   let(:time) { Time.parse '2014-03-05 13:30:59:UTC' }
